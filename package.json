@@ -1,0 +1,16 @@
+{
+  "name": "fileseeder",
+  "version": "1.0.0",
+  "description": "genera archivos scss y tsx mediante plantillas para organismos moléculas y átomos",
+  "main": "index.js",
+  "author": "TheCookies",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "python3 fileseeder.py",
+    "build": "sanity build"
+  },
+  "dependencies": {
+    "python3": "^0.0.1"
+  }
+}
