@@ -7,10 +7,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "org": "python3 comand_fs.py org",
-    "mol": "python3 comand_fs.py mol",
-    "atom": "python3 comand_fs.py atom",
-    "fileseeder": "python3 interface_fs.py"
+    "create:organism": "python3 comand_fs.py org",
+    "create:molecule": "python3 comand_fs.py mol",
+    "create:atom": "python3 comand_fs.py atom",
+    "open:fileseeder": "python3 interface_fs.py"
   },
   "dependencies": {
     "python3": "^0.0.1"
