@@ -1,13 +1,13 @@
 import * as React from "react";
 import { PropsWithChildren } from "react";
-#if (${translation} != "")import { useTranslation } from "react-i18next";#end 
+import { useTranslation } from "react-i18next";
 
 type Props${NAME} = PropsWithChildren<{
     element: string;
 }>
 
 const ${NAME}: React.FC<Props${NAME}> = (props: Props${NAME}) => {
-#if (${translation} != "")  const { t } = useTranslation("${className}");#end
+const { t } = useTranslation("global")
   return (
     <section className={`o-${className}`}>
       <div className={`c-${className}`}>
@@ -15,7 +15,7 @@ const ${NAME}: React.FC<Props${NAME}> = (props: Props${NAME}) => {
           <p>
             Puedes encontrarme en ${DIR_PATH} como ${FILE_NAME}
           </p>
-          #if (${translation} != "")<blockquote>{t("${className}.name")}</blockquote>#end
+          <blockquote>{t("global.name")}</blockquote>
           <p>
             y mi flow parte de esta clase o-${className}, en el mismo dir :)
           </p>
