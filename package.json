@@ -7,8 +7,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "python3 fileseeder.py",
-    "build": "sanity build"
+    "org": "python3 comand_fs.py org",
+    "mol": "python3 comand_fs.py mol",
+    "atom": "python3 comand_fs.py atom",
+    "fileseeder": "python3 interface_fs.py"
   },
   "dependencies": {
     "python3": "^0.0.1"
