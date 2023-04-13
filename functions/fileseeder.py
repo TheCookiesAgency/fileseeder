@@ -18,24 +18,31 @@ def fileseeder( tipo=None, name=""):
     if name == "":
         print(f'Debes agregar el nombre del componente que quieres crear (CamelCase)')
         return
+    if name.startswith("_"):
+        name = name.lstrip("_")
 
     # Restricción de la variable type y definir archivos y directorio
     if tipo == "org":
         scss_file = os.path.join(fs_path, 'templates/Class-Organism.scss')
         tsx_file = os.path.join(fs_path, 'templates/React-Organism.tsx')
         destination_path = org_path
+        tipo_componente = "El organismo"
     if tipo == "mol":
         scss_file = os.path.join(fs_path, 'templates/Class-Molecule.scss')
         tsx_file = os.path.join(fs_path, 'templates/React-Molecule.tsx')
         destination_path = mol_path
+        tipo_componente = "La molécula"
     if tipo == "atom":
         scss_file = os.path.join(fs_path, 'templates/Class-Atom.scss')
         destination_path = atom_path
+        tipo_componente = "El átomo"
     if tipo not in ["org", "mol", "atom"]:
         print(f'Debes especificar si quieres crear un organismo, una molécula o un átomo')
         return
 
-    #Primera letra siempre mayúscula
+    #Primera letra siempre mayúscula y nunca empieza por barra baja
+    if name.startswith("_"):
+        name = name.lstrip("_")
     name = name[0].upper() + name[1:]
 
     # Creación de la variable className
@@ -48,9 +55,8 @@ def fileseeder( tipo=None, name=""):
     rel_path = os.path.relpath(dir_path, root_path)
 
     # Comprobar directorio
-    dir_path = os.path.join(dir_path, name)
     if os.path.exists(dir_path):
-        print(f'Este componente ya existe, por favor inserte otro nombre (CamelCase)')
+        print(f'{tipo_componente} {name} ya existe, por favor inserte otro nombre (CamelCase)')
     else:
 
         # Crear directorio en caso de que no exista
