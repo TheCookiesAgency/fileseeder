@@ -3,12 +3,12 @@ from tkinter import ttk
 from functions.fileseeder import fileseeder
 
 options = ["               ", "organismo", "molécula", "átomo"]
-tipo = {"organismo": "org", "molécula": "mol", "átomo": "atom"}
+tipo = {"               ": None, "organismo": "org", "molécula": "mol", "átomo": "atom"}
 
 # Generar archivos
 def submit():
     fileseeder(tipo[select.get()], name_entry.get())
-    root.destroy()
+    
 
 # Crear ventana
 root = tk.Tk()
