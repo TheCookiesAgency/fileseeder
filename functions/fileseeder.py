@@ -18,8 +18,6 @@ def fileseeder( tipo=None, name=""):
     if name == "":
         print(f'Debes agregar el nombre del componente que quieres crear (CamelCase)')
         return
-    if name.startswith("_"):
-        name = name.lstrip("_")
 
     # Restricción de la variable type y definir archivos y directorio
     if tipo == "org":
