@@ -3,6 +3,14 @@ from .camel_to_kebab import camel_to_kebab
 
 def fileseeder( tipo=None, name=""):
 
+    # Definir el directorio components para crear los subdirectorios
+    dir_path = os.path.join(os.getcwd(), 'components')
+
+    # Definir los subdirectorios de components
+    org_path = os.path.join(dir_path, 'org')
+    mol_path = os.path.join(dir_path, 'mol')
+    atom_path = os.path.join(dir_path, 'atom')
+
     # Restricción de la variable name
     if name == "":
         print(f'Debes agregar el nombre del componente que quieres crear (CamelCase)')
@@ -10,13 +18,13 @@ def fileseeder( tipo=None, name=""):
 
     # Restricción de la variable type
     if tipo == "org":
-        scss_file = "./templates/Class-Organism.scss"
-        tsx_file = "./templates/React-Organism.tsx"
+        scss_file = os.path.join(dir_path, 'templates/Class-Organism.scss')
+        tsx_file = os.path.join(dir_path, 'templates/React-Organism.tsx')
     if tipo == "mol":
-        scss_file = "./templates/Class-Molecule.scss"
-        tsx_file = "./templates/React-Molecule.tsx"
+        scss_file = os.path.join(dir_path, 'templates/Class-Molecule.scss')
+        tsx_file = os.path.join(dir_path, 'templates/React-Molecule.tsx')
     if tipo == "atom":
-        scss_file = "./templates/Class-Atom.scss"
+        scss_file = os.path.join(dir_path, 'templates/Class-Atom.scss')
     if tipo not in ["org", "mol", "atom"]:
         print(f'Debes especificar si quieres crear un organismo, una molécula o un átomo')
         return
@@ -27,22 +35,17 @@ def fileseeder( tipo=None, name=""):
     # Creación de la variable className
     className = camel_to_kebab(name)
 
-    # Definir el directorio components para crear los subdirectorios
-    dir_path = os.path.join(os.getcwd(), 'components')
-
-    # Definir los subdirectorios de components
-    org_path = os.path.join(dir_path, 'org')
-    mol_path = os.path.join(dir_path, 'mol')
-    atom_path = os.path.join(dir_path, 'atom')
-
     # Crear el directorio components si no existe
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
 
         # Crear los subdirectorios 'org', 'mol' y 'atom' dentro del directorio components
-        os.mkdir(org_path)
-        os.mkdir(mol_path)
-        os.mkdir(atom_path)
+        if not os.path.exists(org_path):
+            os.mkdir(org_path)
+        if not os.path.exists(mol_path):
+            os.mkdir(mol_path)
+        if not os.path.exists(atom_path):
+            os.mkdir(atom_path)
 
     # Asignar directorio dependiendo del tipo
     if tipo == "org":
