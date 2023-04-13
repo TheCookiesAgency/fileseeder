@@ -15,7 +15,7 @@ def fileseeder( tipo=None, name=""):
     atom_path = os.path.join(root_path, 'web/src/styles/components/atoms')
 
     # Restricción de la variable name
-    if name == "":
+    if name == "" or name.startswith("-"):
         print(f'Debes agregar el nombre del componente que quieres crear (CamelCase)')
         return
 
