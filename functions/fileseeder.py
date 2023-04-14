@@ -3,7 +3,7 @@ from .camel_to_kebab import camel_to_kebab
 from .delete_dir import delete_dir
 from .alpha_filter import alpha_filter
 
-def fileseeder( tipo = None, name = None, delete = None ):
+def fileseeder( tipo = None, camelName = None, delete = None ):
 
     # Definir carpeta raiz del proyecto
     root_path = os.getcwd()
@@ -15,9 +15,20 @@ def fileseeder( tipo = None, name = None, delete = None ):
     org_path = os.path.join(root_path, 'web/src/sections')
     mol_path = os.path.join(root_path, 'web/src/modules')
     atom_path = os.path.join(root_path, 'web/src/styles/components/atoms')
+    sdoc_path = os.path.join(root_path, 'backoffice/schemas')
+    sobj_path = os.path.join(root_path, 'backoffice/schemas/objects')
+    gpag_path = os.path.join(root_path, 'web/src/pages')
+    gtemp_path = os.path.join(root_path, 'web/src/templates')
+    land_path = os.path.join(root_path, 'web/src/styles/layouts')
+
+    # Definir variables de posibles archivos
+    scss_file = None
+    tsx_file = None
+    ts_file = None
+    is_folder = False
 
     # Restricción de la variable name
-    if name == None:
+    if camelName == None:
         print(f'Debes agregar el nombre del componente que quieres crear (CamelCase)')
         return
 
@@ -26,75 +37,112 @@ def fileseeder( tipo = None, name = None, delete = None ):
         scss_file = os.path.join(fs_path, 'templates/Class-Organism.scss')
         tsx_file = os.path.join(fs_path, 'templates/React-Organism.tsx')
         destination_path = org_path
-        tipo_componente = "El organismo"
+        is_folder = True
     if tipo == "mol":
         scss_file = os.path.join(fs_path, 'templates/Class-Molecule.scss')
         tsx_file = os.path.join(fs_path, 'templates/React-Molecule.tsx')
         destination_path = mol_path
-        tipo_componente = "La molécula"
+        is_folder = True
     if tipo == "atom":
         scss_file = os.path.join(fs_path, 'templates/Class-Atom.scss')
         destination_path = atom_path
-        tipo_componente = "El átomo"
-    if tipo not in ["org", "mol", "atom"]:
-        print(f'Debes especificar si quieres crear un organismo, una molécula o un átomo')
+    if tipo == "sdoc":
+        ts_file = os.path.join(fs_path, 'templates/Sanity-Document.ts')
+        destination_path = sdoc_path
+    if tipo == "sobj":
+        ts_file = os.path.join(fs_path, 'templates/Sanity-Object.ts')
+        destination_path = sobj_path
+    if tipo == "gpag":
+        tsx_file = os.path.join(fs_path, 'templates/Gastby-Layout.tsx')
+        destination_path = gpag_path
+    if tipo == "gtemp":
+        tsx_file = os.path.join(fs_path, 'templates/Gastby-Layout.tsx')
+        destination_path = gtemp_path
+    if tipo == "land":
+        scss_file = os.path.join(fs_path, 'templates/Class-Landing.scss')
+        destination_path = land_path
+    if tipo not in ["org", "mol", "atom", "sdoc", "sobj", "gpag", "gtemp", "land"]:
+        print(f'Debes especificar que quieres crear')
         return
 
     #Primera letra siempre mayúscula
-    name = alpha_filter(name)
-    name = name[0].upper() + name[1:]
+    camelName = alpha_filter(camelName)
+    camelName = camelName[0].upper() + camelName[1:]
 
     # Creación de la variable className
-    className = camel_to_kebab(name)
+    kebabName = camel_to_kebab(camelName)
 
     # Definir carpeta del componente
-    dir_path = os.path.join(destination_path, name)
+    if is_folder:
+        destination_path = os.path.join(destination_path, camelName)
 
     # Definir carpeta del componente con ruta relativa
-    rel_path = os.path.relpath(dir_path, root_path)
+    rel_path = os.path.relpath(destination_path, root_path)
+
+    # Definir la ruta completa del archivo por crear
+    if scss_file is not None:
+        if "web/src/styles" in destination_path:
+            file_path = os.path.join(destination_path, "_" + kebabName + ".scss")
+        else:
+            file_path = os.path.join(destination_path, kebabName + ".scss")
+    if tsx_file is not None:
+        file_path = os.path.join(destination_path, camelName + ".tsx")
+    if ts_file is not None:
+        file_path = os.path.join(destination_path, kebabName + ".ts")
 
     # Comprobar directorio
-    if os.path.exists(dir_path):
+    if os.path.exists(file_path):
 
         # Casos para borrar el componente recién creado
         if delete == "--d":
-            delete_dir(dir_path)
-            print(f'{tipo_componente} {name} se ha eliminado correctamente')
+            if is_folder:
+                delete_dir(destination_path)
+            else:
+                os.remove(file_path)
+            print(f'{camelName} se ha eliminado correctamente')
         elif delete == None:
-            print(f'{tipo_componente} {name} ya existe, por favor inserte otro nombre (CamelCase)')
+            print(f'{tipo} {camelName} ya existe, por favor inserte otro nombre (CamelCase)')
         else:
             print(f'Para borrar el componente debes añadir --d al final del comando')
 
     else:
         if delete == None:
             # Crear directorio en caso de que no exista
-            os.makedirs(dir_path)
-            print(f'{dir_path} creado')
+            if not os.path.exists(destination_path):
+                os.makedirs(destination_path)
+                print(f'{destination_path} creado')
 
             # Crear archivo SCSS
-            with open(scss_file, 'r') as reference_file:
-                code = reference_file.read().replace('${NAME}', className)
-            if tipo == "atom":
-                scss_path = os.path.join(dir_path, "_" + className + ".scss")
-            else:
-                scss_path = os.path.join(dir_path, className + ".scss")
-            with open(scss_path, 'w') as new_file:
-                new_file.write(code)
-            print(f'{scss_path} creado')
-
-            # Omitir creación de archivo TSX si la opción es "átomo"
-            if tipo == "atom":
-                return
+            if scss_file is not None:
+                with open(scss_file, 'r') as reference_file:
+                    code = reference_file.read().replace('${NAME}', kebabName)
+                if is_folder:
+                    file_path = os.path.join(destination_path, kebabName + ".scss")
+                with open(file_path, 'w') as new_file:
+                    new_file.write(code)
+                print(f'{file_path} creado')
 
             # Crear archivo TSX
-            with open(tsx_file, 'r') as reference_file:
-                code = reference_file.read().replace('${NAME}', name).replace('${className}', className)
-                code = code.replace('${DIR_PATH}', rel_path)
-                code = code.replace('${FILE_NAME}', name + ".tsx")
-            tsx_path = os.path.join(dir_path, name + ".tsx")
-            with open(tsx_path, 'w') as new_file:
-                new_file.write(code)
-            print(f'{tsx_path} creado')
+            if tsx_file is not None:
+                with open(tsx_file, 'r') as reference_file:
+                    code = reference_file.read().replace('${NAME}', camelName).replace('${className}', kebabName)
+                    code = code.replace('${DIR_PATH}', rel_path)
+                    code = code.replace('${FILE_NAME}', camelName + ".tsx")
+                    code = code.replace('${namePage}', camelName)
+                if is_folder:
+                    file_path = os.path.join(destination_path, camelName + ".tsx")
+                with open(file_path, 'w') as new_file:
+                    new_file.write(code)
+                print(f'{file_path} creado')
+
+            # Crear archivo TS
+            if ts_file is not None:
+                with open(ts_file, 'r') as reference_file:
+                    code = reference_file.read().replace('${NAME}', kebabName)
+                    code = code.replace('${TITLE}', kebabName)
+                with open(file_path, 'w') as new_file:
+                    new_file.write(code)
+                print(f'{file_path} creado')
 
         # Caso por si se ha puesto --d por error
         else:

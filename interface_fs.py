@@ -2,8 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 from functions.fileseeder import fileseeder
 
-options = ["               ", "organismo", "molécula", "átomo"]
-tipo = {"               ": None, "organismo": "org", "molécula": "mol", "átomo": "atom"}
+options = ["-- selecciona plantilla --", "organismo", "molécula", "átomo", "documento Sanity", "objeto Sanity", "página Gatsby", "plantilla Gatsby", "landing"]
+tipo = {"-- selecciona plantilla --": None, "organismo": "org", "molécula": "mol", "átomo": "atom", "documento Sanity": "sdoc", "objeto Sanity": "sobj", "página Gatsby": "gpag", "plantilla Gatsby": "gtemp", "landing": "land"}
 
 # Generar archivos
 def submit():
