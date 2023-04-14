@@ -12,6 +12,7 @@ def submit():
     else:
         name = name_entry.get()
     fileseeder(tipo[select.get()], name)
+    name_entry.delete(0, tk.END)
     
 
 # Crear ventana
