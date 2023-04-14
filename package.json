@@ -1,7 +1,7 @@
 {
   "name": "fileseeder",
   "version": "1.0.0",
-  "description": "genera archivos scss y tsx mediante plantillas para organismos moléculas y átomos",
+  "description": "genera archivos mediante plantillas",
   "main": "index.js",
   "author": "TheCookies",
   "license": "MIT",
