@@ -1,7 +1,8 @@
 import os
 from .camel_to_kebab import camel_to_kebab
+from .delete_dir import delete_dir
 
-def fileseeder( tipo = None, name = "", delete = None ):
+def fileseeder( tipo = None, name = None, delete = None ):
 
     # Definir carpeta raiz del proyecto
     root_path = os.getcwd()
@@ -15,7 +16,7 @@ def fileseeder( tipo = None, name = "", delete = None ):
     atom_path = os.path.join(root_path, 'web/src/styles/components/atoms')
 
     # Restricción de la variable name
-    if name == "" or name.startswith("-"):
+    if name == None or name.startswith("--"):
         print(f'Debes agregar el nombre del componente que quieres crear (CamelCase)')
         return
 
@@ -54,34 +55,47 @@ def fileseeder( tipo = None, name = "", delete = None ):
 
     # Comprobar directorio
     if os.path.exists(dir_path):
-        print(f'{tipo_componente} {name} ya existe, por favor inserte otro nombre (CamelCase)')
-    else:
 
-        # Crear directorio en caso de que no exista
-        os.makedirs(dir_path)
-        print(f'{dir_path} creado')
-    
-        # Crear archivo SCSS
-        with open(scss_file, 'r') as reference_file:
-            code = reference_file.read().replace('${NAME}', className)
-        if tipo == "atom":
-            scss_path = os.path.join(dir_path, "_" + className + ".scss")
+        # Casos para borrar el componente recién creado
+        if delete == "--d":
+            delete_dir(dir_path)
+            print(f'{tipo_componente} {name} se ha eliminado correctamente')
+        elif delete == None:
+            print(f'{tipo_componente} {name} ya existe, por favor inserte otro nombre (CamelCase)')
         else:
-            scss_path = os.path.join(dir_path, className + ".scss")
-        with open(scss_path, 'w') as new_file:
-            new_file.write(code)
-        print(f'{scss_path} creado')
-    
-        # Omitir creación de archivo TSX si la opción es "átomo"
-        if tipo == "atom":
-            return
-        
-        # Crear archivo TSX
-        with open(tsx_file, 'r') as reference_file:
-            code = reference_file.read().replace('${NAME}', name).replace('${className}', className)
-            code = code.replace('${DIR_PATH}', rel_path)
-            code = code.replace('${FILE_NAME}', name + ".tsx")
-        tsx_path = os.path.join(dir_path, name + ".tsx")
-        with open(tsx_path, 'w') as new_file:
-            new_file.write(code)
-        print(f'{tsx_path} creado')
+            print(f'Para borrar el componente debes añadir --d al final del comando')
+
+    else:
+        if delete == None:
+            # Crear directorio en caso de que no exista
+            os.makedirs(dir_path)
+            print(f'{dir_path} creado')
+
+            # Crear archivo SCSS
+            with open(scss_file, 'r') as reference_file:
+                code = reference_file.read().replace('${NAME}', className)
+            if tipo == "atom":
+                scss_path = os.path.join(dir_path, "_" + className + ".scss")
+            else:
+                scss_path = os.path.join(dir_path, className + ".scss")
+            with open(scss_path, 'w') as new_file:
+                new_file.write(code)
+            print(f'{scss_path} creado')
+
+            # Omitir creación de archivo TSX si la opción es "átomo"
+            if tipo == "atom":
+                return
+
+            # Crear archivo TSX
+            with open(tsx_file, 'r') as reference_file:
+                code = reference_file.read().replace('${NAME}', name).replace('${className}', className)
+                code = code.replace('${DIR_PATH}', rel_path)
+                code = code.replace('${FILE_NAME}', name + ".tsx")
+            tsx_path = os.path.join(dir_path, name + ".tsx")
+            with open(tsx_path, 'w') as new_file:
+                new_file.write(code)
+            print(f'{tsx_path} creado')
+
+        # Caso por si se ha puesto --d por error
+        else:
+            print(f'El componente que estas intentando eliminar no existe')

@@ -7,7 +7,11 @@ tipo = {"               ": None, "organismo": "org", "molécula": "mol", "átomo
 
 # Generar archivos
 def submit():
-    fileseeder(tipo[select.get()], name_entry.get())
+    if name_entry.get() == "":
+        name = None
+    else:
+        name = name_entry.get()
+    fileseeder(tipo[select.get()], name)
     
 
 # Crear ventana
