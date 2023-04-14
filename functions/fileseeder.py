@@ -1,7 +1,7 @@
 import os
 from .camel_to_kebab import camel_to_kebab
 
-def fileseeder( tipo=None, name=""):
+def fileseeder( tipo = None, name = "", delete = None ):
 
     # Definir carpeta raiz del proyecto
     root_path = os.getcwd()
