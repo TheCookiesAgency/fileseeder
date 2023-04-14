@@ -1,6 +1,7 @@
 import os
 from .camel_to_kebab import camel_to_kebab
 from .delete_dir import delete_dir
+from .alpha_filter import alpha_filter
 
 def fileseeder( tipo = None, name = None, delete = None ):
 
@@ -16,7 +17,7 @@ def fileseeder( tipo = None, name = None, delete = None ):
     atom_path = os.path.join(root_path, 'web/src/styles/components/atoms')
 
     # Restricción de la variable name
-    if name == None or name.startswith("--"):
+    if name == None:
         print(f'Debes agregar el nombre del componente que quieres crear (CamelCase)')
         return
 
@@ -39,9 +40,8 @@ def fileseeder( tipo = None, name = None, delete = None ):
         print(f'Debes especificar si quieres crear un organismo, una molécula o un átomo')
         return
 
-    #Primera letra siempre mayúscula y nunca empieza por barra baja
-    if name.startswith("_"):
-        name = name.lstrip("_")
+    #Primera letra siempre mayúscula
+    name = alpha_filter(name)
     name = name[0].upper() + name[1:]
 
     # Creación de la variable className
