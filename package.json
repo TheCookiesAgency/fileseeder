@@ -11,7 +11,7 @@
     "create:molecule": "python3 comand_fs.py mol",
     "create:atom": "python3 comand_fs.py atom",
     "open:fileseeder": "python3 interface_fs.py",
-    "clean:test-components": "python3 cleaner.py"
+    "clean:tests": "python3 cleaner.py"
   },
   "dependencies": {
     "python3": "^0.0.1"
