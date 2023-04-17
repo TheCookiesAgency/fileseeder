@@ -31,6 +31,10 @@ def fileseeder( tipo = None, camelName = None, delete = None ):
     if camelName == None:
         print(f'Debes agregar el nombre del componente que quieres crear (CamelCase)')
         return
+    
+    #Primera letra siempre mayúscula
+    camelName = alpha_filter(camelName)
+    camelName = camelName[0].upper() + camelName[1:]
 
     # Restricción de la variable type y definir archivos y directorio
     if tipo == "org":
@@ -49,6 +53,11 @@ def fileseeder( tipo = None, camelName = None, delete = None ):
     if tipo == "sdoc":
         ts_file = os.path.join(fs_path, 'templates/Sanity-Document.ts')
         destination_path = sdoc_path
+
+        # Restricción del nombre index en documento de Sanity
+        if camelName == "Index":
+            camelName = "Home"
+            
     if tipo == "sobj":
         ts_file = os.path.join(fs_path, 'templates/Sanity-Object.ts')
         destination_path = sobj_path
@@ -64,10 +73,6 @@ def fileseeder( tipo = None, camelName = None, delete = None ):
     if tipo not in ["org", "mol", "atom", "sdoc", "sobj", "gpag", "gtemp", "land"]:
         print(f'Debes especificar que quieres crear')
         return
-
-    #Primera letra siempre mayúscula
-    camelName = alpha_filter(camelName)
-    camelName = camelName[0].upper() + camelName[1:]
 
     # Creación de la variable className
     kebabName = camel_to_kebab(camelName)
