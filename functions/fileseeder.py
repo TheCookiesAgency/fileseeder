@@ -3,7 +3,7 @@ from .camel_to_kebab import camel_to_kebab
 from .delete_dir import delete_dir
 from .alpha_filter import alpha_filter
 
-def fileseeder( tipo = None, camelName = None, delete = None ):
+def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = False, renameFile = False ):
 
     # Definir carpeta raiz del proyecto
     root_path = os.getcwd()
@@ -74,8 +74,15 @@ def fileseeder( tipo = None, camelName = None, delete = None ):
         print(f'Debes especificar que quieres crear')
         return
 
-    # Creación de la variable className
+    # Creación de la variable kebabName
     kebabName = camel_to_kebab(camelName)
+
+    # Definir variable canonTraduccion en caso de que sea None
+    if camelTraduccion == None:
+        camelTraduccion = camelName
+
+    # Creación de la variable kebabName
+    kebabTraduccion = camel_to_kebab(camelTraduccion)
 
     # Definir carpeta del componente
     if is_folder:
@@ -99,19 +106,17 @@ def fileseeder( tipo = None, camelName = None, delete = None ):
     if os.path.exists(file_path):
 
         # Casos para borrar el componente recién creado
-        if delete == "--d":
+        if delete == True:
             if is_folder:
                 delete_dir(destination_path)
             else:
                 os.remove(file_path)
             print(f'{camelName} se ha eliminado correctamente')
-        elif delete == None:
-            print(f'{tipo} {camelName} ya existe, por favor inserte otro nombre (CamelCase)')
         else:
-            print(f'Para borrar el componente debes añadir --d al final del comando')
+            print(f'{tipo} {camelName} ya existe, por favor inserte otro nombre (CamelCase)')
 
     else:
-        if delete == None:
+        if delete == False:
             # Crear directorio en caso de que no exista
             if not os.path.exists(destination_path):
                 os.makedirs(destination_path)
@@ -144,7 +149,7 @@ def fileseeder( tipo = None, camelName = None, delete = None ):
             if ts_file is not None:
                 with open(ts_file, 'r') as reference_file:
                     code = reference_file.read().replace('${NAME}', kebabName)
-                    code = code.replace('${TITLE}', kebabName)
+                    code = code.replace('${TITLE}', kebabTraduccion)
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
                 print(f'{file_path} creado')
