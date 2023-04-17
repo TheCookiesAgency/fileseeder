@@ -1,14 +1,21 @@
 import os
 import re
 import argparse
+import sys
 from functions.fileseeder import fileseeder
+import subprocess
 
 root_path = os.getcwd()
+fs_path = os.path.dirname(os.path.abspath(__file__))
 md_path = os.path.join(root_path, 'structure.md')
+his_path = os.path.join(root_path, 'historial_fs.txt')
+rs_path = os.path.join(fs_path, 'functions/read_history.py')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--force', help='Ejecutar una operación forzada', action='store_true')
 args = parser.parse_args()
+
+sys.stdout = open(his_path, 'w')
 
 if args.force:
     with open(md_path, 'r') as structure:
@@ -67,3 +74,7 @@ else:
             if molecule_match:
                 camelName = molecule_match.group(1)
                 fileseeder("mol", camelName)
+
+sys.stdout.close()
+
+subprocess.call(["python3", rs_path])
