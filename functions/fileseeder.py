@@ -22,6 +22,9 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     gtemp_path = os.path.join(root_path, 'web/src/templates')
     land_path = os.path.join(root_path, 'web/src/styles/layouts')
 
+    # Definir la ruta donde se encontrará el layout temporal en caso de gastby
+    temptxt_path = os.path.join(root_path, 'temp_layout_fs.txt')
+
     # Definir variables de posibles archivos
     scss_file = None
     tsx_file = None
@@ -68,9 +71,11 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     if tipo == "gpag":
         tsx_file = os.path.join(fs_path, 'templates/Gastby-Layout.tsx')
         destination_path = gpag_path
+        camelName = camelName + "Page"
     if tipo == "gtemp":
         tsx_file = os.path.join(fs_path, 'templates/Gastby-Layout.tsx')
         destination_path = gtemp_path
+        camelName = camelName + "Template"
     if tipo == "land":
         scss_file = os.path.join(fs_path, 'templates/Class-Landing.scss')
         destination_path = land_path
@@ -158,7 +163,14 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                     code = reference_file.read().replace('${NAME}', camelName).replace('${className}', kebabName)
                     code = code.replace('${DIR_PATH}', rel_path)
                     code = code.replace('${FILE_NAME}', camelName + ".tsx")
-                    code = code.replace('${namePage}', camelName + "Page")
+                    code = code.replace('${namePage}', camelName)
+                    if os.path.exists(temptxt_path):
+                        with open(temptxt_path, 'r') as tempLayoutLine:
+                            layout = tempLayoutLine.read().strip()
+                        code = code.replace('${LAYOUT}', layout)
+                        os.remove(temptxt_path)
+                    else:
+                        code = code.replace('${LAYOUT}', "")
                 if is_folder:
                     if renameFile:
                         file_path = os.path.join(destination_path, kebabTraduccion + ".tsx")

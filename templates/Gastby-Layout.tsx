@@ -7,9 +7,7 @@ import { SEO } from "../modules/SEO/SEO";
 const ${namePage} = ({ data }: PageProps<Queries.${namePage}Query>) => {
   return (
     <Layout>
-      <div className="container">
-          <h1>${NAME}</h1>
-      </div>
+${LAYOUT}
     </Layout>
   )
 }
