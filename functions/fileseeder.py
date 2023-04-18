@@ -84,6 +84,10 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     # Creación de la variable kebabName
     kebabTraduccion = camel_to_kebab(camelTraduccion)
 
+    # Evitamos el error del salto de linea si ya se ha introducido un kebab-case
+    if renameFile:
+        kebabTraduccion = kebabTraduccion[:-1]
+
     # Definir carpeta del componente
     if is_folder:
         destination_path = os.path.join(destination_path, camelName)
@@ -92,13 +96,17 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     rel_path = os.path.relpath(destination_path, root_path)
 
     # Definir la ruta completa del archivo por crear
+
     if scss_file is not None:
         if "web/src/styles" in destination_path:
             file_path = os.path.join(destination_path, "_" + kebabName + ".scss")
         else:
             file_path = os.path.join(destination_path, kebabName + ".scss")
     if tsx_file is not None:
-        file_path = os.path.join(destination_path, camelName + ".tsx")
+        if renameFile:
+            file_path = os.path.join(destination_path, kebabTraduccion + ".tsx")
+        else:
+            file_path = os.path.join(destination_path, camelName + ".tsx")
     if ts_file is not None:
         file_path = os.path.join(destination_path, kebabName + ".ts")
 
@@ -106,7 +114,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     if os.path.exists(file_path):
 
         # Casos para borrar el componente recién creado
-        if delete == True:
+        if delete:
             if is_folder:
                 delete_dir(destination_path)
             else:
