@@ -5,8 +5,8 @@ def build_layout( element ):
 
     root_path = os.getcwd()
     md_path = os.path.join(root_path, 'structure.md')
-    layout_path = os.path.join(root_path, 'temp_layout_fs.txt')
-    imports_path = os.path.join(root_path, 'temp_imports_fs.txt')
+    layout_path = os.path.join(root_path, 'temp_layout_fs.tsx')
+    imports_path = os.path.join(root_path, 'temp_imports_fs.tsx')
 
     with open(md_path, "r") as file:
 

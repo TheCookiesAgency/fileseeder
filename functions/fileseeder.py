@@ -22,9 +22,9 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     gtemp_path = os.path.join(root_path, 'web/src/templates')
     land_path = os.path.join(root_path, 'web/src/styles/layouts')
 
-    # Definir la ruta donde se encontrará el layout temporal en caso de gastby
-    layout_path = os.path.join(root_path, 'temp_layout_fs.txt')
-    imports_path = os.path.join(root_path, 'temp_imports_fs.txt')
+    # Definir la ruta donde se encontrará el layout y los imports temporales en caso de gastby
+    layout_path = os.path.join(root_path, 'temp_layout_fs.tsx')
+    imports_path = os.path.join(root_path, 'temp_imports_fs.tsx')
 
     # Definir variables de posibles archivos
     scss_file = None
