@@ -24,4 +24,4 @@ const { t } = useTranslation("global")
   );
 };
 
-export default ${NAME};
+export {${NAME}};
