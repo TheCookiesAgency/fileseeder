@@ -23,7 +23,8 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     land_path = os.path.join(root_path, 'web/src/styles/layouts')
 
     # Definir la ruta donde se encontrará el layout temporal en caso de gastby
-    temptxt_path = os.path.join(root_path, 'temp_layout_fs.txt')
+    layout_path = os.path.join(root_path, 'temp_layout_fs.txt')
+    imports_path = os.path.join(root_path, 'temp_imports_fs.txt')
 
     # Definir variables de posibles archivos
     scss_file = None
@@ -164,13 +165,18 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                     code = code.replace('${DIR_PATH}', rel_path)
                     code = code.replace('${FILE_NAME}', camelName + ".tsx")
                     code = code.replace('${namePage}', camelName)
-                    if os.path.exists(temptxt_path):
-                        with open(temptxt_path, 'r') as tempLayoutLine:
+                    if os.path.exists(layout_path) and os.path.exists(imports_path):
+                        with open(layout_path, 'r') as tempLayoutLine:
                             layout = tempLayoutLine.read().strip()
+                        with open(imports_path, 'r') as tempImportsLine:
+                            imports = tempImportsLine.read().strip()
                         code = code.replace('${LAYOUT}', layout)
-                        os.remove(temptxt_path)
+                        code = code.replace('${IMPORTS}', imports)
+                        os.remove(layout_path)
+                        os.remove(imports_path)
                     else:
                         code = code.replace('${LAYOUT}', "")
+                        code = code.replace('${IMPORTS}', "")
                 if is_folder:
                     if renameFile:
                         file_path = os.path.join(destination_path, kebabTraduccion + ".tsx")

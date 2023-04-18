@@ -5,7 +5,8 @@ def build_layout( element ):
 
     root_path = os.getcwd()
     md_path = os.path.join(root_path, 'structure.md')
-    temptxt_path = os.path.join(root_path, 'temp_layout_fs.txt')
+    layout_path = os.path.join(root_path, 'temp_layout_fs.txt')
+    imports_path = os.path.join(root_path, 'temp_imports_fs.txt')
 
     with open(md_path, "r") as file:
 
@@ -20,6 +21,10 @@ def build_layout( element ):
                         break
     
 
-    with open(temptxt_path, 'w') as f:
+    with open(layout_path, 'w') as f:
         for organismo in organismos:
             f.write('      <'+organismo+' element={`'+element+'`} />\n')
+
+    with open(imports_path, 'w') as f:
+        for organismo in organismos:
+            f.write('import { '+organismo+' } from "../sections/'+organismo+'/'+organismo+'"\n')
