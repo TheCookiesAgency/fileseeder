@@ -18,6 +18,8 @@ export const Head = () => <SEO />;
 
 export const query = graphql`
     query ${namePage}{
-    
+        site {
+            buildTime(formatString: "YYYY-MM-DD hh:mm a z")
+        }
     }
-`
+`;
