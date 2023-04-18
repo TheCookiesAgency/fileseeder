@@ -25,6 +25,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     scss_file = None
     tsx_file = None
     ts_file = None
+    new_folder = None
     is_folder = False
 
     # Restricción de la variable name
@@ -42,11 +43,13 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         tsx_file = os.path.join(fs_path, 'templates/React-Organism.tsx')
         destination_path = org_path
         is_folder = True
+        new_folder = camelName
     if tipo == "mol":
         scss_file = os.path.join(fs_path, 'templates/Class-Molecule.scss')
         tsx_file = os.path.join(fs_path, 'templates/React-Molecule.tsx')
         destination_path = mol_path
         is_folder = True
+        new_folder = camelName
     if tipo == "atom":
         scss_file = os.path.join(fs_path, 'templates/Class-Atom.scss')
         destination_path = atom_path
@@ -81,22 +84,27 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     if camelTraduccion == None:
         camelTraduccion = camelName
 
+    # Si en structure.md se especifica una ruta se creará dentro de la ruta correspondiente
+    if renameFile and '/' in camelTraduccion:
+        is_folder = True
+        new_folder = camelTraduccion[:len(camelTraduccion) - len(camelTraduccion.split('/')[-1])]
+        camelTraduccion = camelTraduccion.split('/')[-1]
+
     # Creación de la variable kebabName
     kebabTraduccion = camel_to_kebab(camelTraduccion)
 
-    # Evitamos el error del salto de linea si ya se ha introducido un kebab-case
+    # Eliminamos el salto de línea en caso de que venga desde structure.md
     if renameFile:
         kebabTraduccion = kebabTraduccion[:-1]
 
     # Definir carpeta del componente
     if is_folder:
-        destination_path = os.path.join(destination_path, camelName)
+        destination_path = os.path.join(destination_path, new_folder)
 
     # Definir carpeta del componente con ruta relativa
     rel_path = os.path.relpath(destination_path, root_path)
 
     # Definir la ruta completa del archivo por crear
-
     if scss_file is not None:
         if "web/src/styles" in destination_path:
             file_path = os.path.join(destination_path, "_" + kebabName + ".scss")
