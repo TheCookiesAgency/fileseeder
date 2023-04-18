@@ -1,5 +1,5 @@
 import os
-from functions.delete_dir import delete_dir
+from delete_dir import delete_dir
 
 fs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 web_path = os.path.join(fs_path, 'web')
