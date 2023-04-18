@@ -17,7 +17,7 @@
     "create:landing": "python3 comand_fs.py land",
     "open:fileseeder": "python3 interface_fs.py",
     "create:structure": "python3 bystructure_fs.py",
-    "clean:all": "python3 cleaner.py",
+    "clean:all": "python3 functions/cleaner.py",
     "test:all": "yarn create:organism test && yarn create:molecule test && yarn create:atom test && yarn create:sanity-document test && yarn create:sanity-object test && yarn create:gatsby-page test && yarn create:gatsby-template test && yarn create:landing test"
   },
   "dependencies": {
