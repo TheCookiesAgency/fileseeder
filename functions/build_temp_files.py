@@ -1,7 +1,7 @@
 import os
 
 
-def build_layout( element ):
+def build_temp_files( element ):
 
     root_path = os.getcwd()
     md_path = os.path.join(root_path, 'structure.md')

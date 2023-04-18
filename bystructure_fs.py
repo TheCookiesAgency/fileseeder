@@ -2,7 +2,7 @@ import os
 import re
 import argparse
 import sys
-from functions.build_layout import build_layout
+from functions.build_temp_files import build_temp_files
 from functions.fileseeder import fileseeder
 import subprocess
 
@@ -78,14 +78,14 @@ else:
             page_match = re.search(r'^# \*\*(\w+)\*\*$', linea)
             if page_match:
                 camelName = page_match.group(1)
-                build_layout(camelName)
+                build_temp_files(camelName)
                 fileseeder("gpag", camelName)
                 fileseeder("land", camelName)
                 fileseeder("sdoc", camelName)
             template_match = re.search(r'^# (\w+)$', linea)
             if template_match:
                 camelName = template_match.group(1)
-                build_layout(camelName)
+                build_temp_files(camelName)
                 fileseeder("gtemp", camelName)
                 fileseeder("land", camelName)
                 fileseeder("sdoc", camelName)
@@ -101,7 +101,7 @@ else:
             page_match_traduccion = re.search(r'^# \*\*(\w+)\*\* - ', linea)
             if page_match_traduccion:
                 camelName = page_match_traduccion.group(1)
-                build_layout(camelName)
+                build_temp_files(camelName)
                 kebabTraduccion = linea.split(' - ')[1]
                 fileseeder("gpag", camelName, kebabTraduccion, False, True)
                 fileseeder("land", camelName)
@@ -109,7 +109,7 @@ else:
             template_match_traduccion = re.search(r'^# (\w+) - ', linea)
             if template_match_traduccion:
                 camelName = template_match_traduccion.group(1)
-                build_layout(camelName)
+                build_temp_files(camelName)
                 kebabTraduccion = linea.split(' - ')[1]
                 fileseeder("gtemp", camelName, kebabTraduccion, False, True)
                 fileseeder("land", camelName)
