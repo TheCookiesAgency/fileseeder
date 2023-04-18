@@ -1,4 +1,5 @@
 import os
+import re
 from .camel_to_kebab import camel_to_kebab
 from .delete_dir import delete_dir
 from .alpha_filter import alpha_filter
@@ -87,7 +88,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     # Si en structure.md se especifica una ruta se creará dentro de la ruta correspondiente
     if renameFile and '/' in camelTraduccion:
         is_folder = True
-        new_folder = camelTraduccion[:len(camelTraduccion) - len(camelTraduccion.split('/')[-1])]
+        new_folder = camelTraduccion[:len(camelTraduccion) - len(camelTraduccion.split('/')[-1]) - 1]
         camelTraduccion = camelTraduccion.split('/')[-1]
 
     # Creación de la variable kebabName
@@ -116,7 +117,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         else:
             file_path = os.path.join(destination_path, camelName + ".tsx")
     if ts_file is not None:
-        file_path = os.path.join(destination_path, kebabName + ".ts")
+        file_path = os.path.join(destination_path, camelName + ".ts")
 
     # Comprobar directorio
     if os.path.exists(file_path):
@@ -129,7 +130,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                 os.remove(file_path)
             print(f'{camelName} se ha eliminado correctamente')
         else:
-            print(f'{tipo} {camelName} ya existe, por favor inserte otro nombre (CamelCase)')
+            print(f'{file_path} ya existe, por favor inserte otro nombre (CamelCase)')
 
     else:
         if delete == False:
@@ -143,7 +144,10 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                 with open(scss_file, 'r') as reference_file:
                     code = reference_file.read().replace('${NAME}', kebabName)
                 if is_folder:
-                    file_path = os.path.join(destination_path, kebabName + ".scss")
+                    if renameFile:
+                        file_path = os.path.join(destination_path, kebabTraduccion + ".scss")
+                    else:
+                        file_path = os.path.join(destination_path, kebabName + ".scss")
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
                 print(f'{file_path} creado')
@@ -154,9 +158,12 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                     code = reference_file.read().replace('${NAME}', camelName).replace('${className}', kebabName)
                     code = code.replace('${DIR_PATH}', rel_path)
                     code = code.replace('${FILE_NAME}', camelName + ".tsx")
-                    code = code.replace('${namePage}', camelName)
+                    code = code.replace('${namePage}', camelName + "Page")
                 if is_folder:
-                    file_path = os.path.join(destination_path, camelName + ".tsx")
+                    if renameFile:
+                        file_path = os.path.join(destination_path, kebabTraduccion + ".tsx")
+                    else:
+                        file_path = os.path.join(destination_path, camelName + ".tsx")
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
                 print(f'{file_path} creado')
@@ -164,7 +171,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
             # Crear archivo TS
             if ts_file is not None:
                 with open(ts_file, 'r') as reference_file:
-                    code = reference_file.read().replace('${NAME}', kebabName)
+                    code = reference_file.read().replace('${NAME}', camelName)
                     code = code.replace('${TITLE}', kebabTraduccion)
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
