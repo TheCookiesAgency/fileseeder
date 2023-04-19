@@ -23,7 +23,7 @@ def build_temp_files( element ):
 
     with open(layout_path, 'w') as f:
         for organismo in organismos:
-            f.write('      <'+organismo+' element={`'+element+'`} />\n')
+            f.write('      <'+organismo+' />\n')
 
     organismos.sort()
 
