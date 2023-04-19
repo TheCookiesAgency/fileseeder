@@ -33,7 +33,10 @@ with open(md_path, 'r') as structure:
             if args.backoffice == False:
                 build_temp_files(camelName)
                 if args.force:
-                    fileseeder("gpag", camelName, None, True)
+                    if page_match_traduccion:
+                        fileseeder("gpag", camelName, kebabTraduccion, True, True)
+                    if page_match_default:
+                        fileseeder("gpag", camelName, None, True)
                     fileseeder("land", camelName, None, True)
                 if page_match_traduccion:
                     fileseeder("gpag", camelName, kebabTraduccion, False, True)
@@ -54,7 +57,10 @@ with open(md_path, 'r') as structure:
             if args.backoffice == False:
                 build_temp_files(camelName)
                 if args.force:
-                    fileseeder("gtemp", camelName, None, True)
+                    if page_match_traduccion:
+                        fileseeder("gtemp", camelName, kebabTraduccion, True, True)
+                    if page_match_default:
+                        fileseeder("gtemp", camelName, None, True)
                     fileseeder("land", camelName, None, True)
                 if template_match_traduccion:
                     fileseeder("gtemp", camelName, kebabTraduccion, False, True)
