@@ -19,6 +19,10 @@ parser.add_argument('--web', help='Crea solo los archivos que se crean en web', 
 parser.add_argument('--backoffice', help='Crea solo los archivos que se crean en backoffice', action='store_true')
 args = parser.parse_args()
 
+if args.web and args.backoffice:
+    args.web = False
+    args.backoffice = False
+
 sys.stdout = open(his_path, 'w')
 
 with open(md_path, 'r') as structure:
