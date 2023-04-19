@@ -25,6 +25,8 @@ def build_temp_files( element ):
         for organismo in organismos:
             f.write('      <'+organismo+' element={`'+element+'`} />\n')
 
+    organismos.sort()
+
     with open(imports_path, 'w') as f:
         for organismo in organismos:
             f.write('import { '+organismo+' } from "../sections/'+organismo+'/'+organismo+'"\n')

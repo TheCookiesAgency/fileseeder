@@ -8,7 +8,7 @@ ${IMPORTS}
 const ${namePage} = ({ data }: PageProps<Queries.${namePage}Query>) => {
   return (
     <Layout>
-${LAYOUT}
+      ${LAYOUT}
     </Layout>
   )
 }
