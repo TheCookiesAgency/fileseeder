@@ -29,4 +29,4 @@ def build_temp_files( element ):
 
     with open(imports_path, 'w') as f:
         for organismo in organismos:
-            f.write('import { '+organismo+' } from "../sections/'+organismo+'/'+organismo+'"\n')
+            f.write('import { '+organismo+' } from "../sections/'+organismo+'/'+organismo+';"\n')
