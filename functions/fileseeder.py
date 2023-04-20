@@ -123,7 +123,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         else:
             file_path = os.path.join(destination_path, camelName + ".tsx")
     if ts_file is not None:
-        file_path = os.path.join(destination_path, camelName + ".ts")
+        file_path = os.path.join(destination_path, kebabName + ".ts")
 
     # Comprobar directorio
     if os.path.exists(file_path):
