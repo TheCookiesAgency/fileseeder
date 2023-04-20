@@ -32,10 +32,14 @@ with open(md_path, 'r') as structure:
         page_match_traduccion = re.search(r'^# \*\*(\w+)\*\* - ', linea)
         if page_match:
             camelName = page_match.group(1)
+            ndir = 0
             if page_match_traduccion:
                 kebabTraduccion = linea.split(' - ')[1]
+                for char in kebabTraduccion:
+                    if char == "/":
+                        ndir += 1
             if args.backoffice == False:
-                build_temp_files(camelName)
+                build_temp_files(camelName, ndir)
                 if args.force:
                     if page_match_traduccion:
                         fileseeder("gpag", camelName, kebabTraduccion, True, True)

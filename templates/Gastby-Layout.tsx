@@ -1,8 +1,6 @@
 import { graphql, PageProps } from "gatsby";
 import React from "react";
 
-import Layout from "../modules/Layout/Layout";
-import { SEO } from "../modules/SEO/SEO";
 ${IMPORTS}
 
 const ${namePage} = ({ data }: PageProps<Queries.${namePage}Query>) => {
