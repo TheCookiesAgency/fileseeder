@@ -57,21 +57,17 @@ with open(md_path, 'r') as structure:
                 fileseeder("sdoc", camelName)
         template_match = re.search(r'^# (\w+)', linea)
         template_match_default = re.search(r'^# (\w+)$', linea)
-        template_match_traduccion = re.search(r'^# (\w+) - ', linea)
+        # template_match_traduccion = re.search(r'^# (\w+) - ', linea)
         if template_match:
             camelName = template_match.group(1)
-            if template_match_traduccion:
-                kebabTraduccion = linea.split(' - ')[1]
             if args.backoffice == False:
-                build_temp_files(camelName)
+                build_temp_files(camelName, 1)
                 if args.force:
                     if page_match_traduccion:
                         fileseeder("gtemp", camelName, kebabTraduccion, True, True)
                     if page_match_default:
                         fileseeder("gtemp", camelName, None, True)
                     fileseeder("land", camelName, None, True)
-                if template_match_traduccion:
-                    fileseeder("gtemp", camelName, kebabTraduccion, False, True)
                 if template_match_default:
                     fileseeder("gtemp", camelName)
                 fileseeder("land", camelName)
