@@ -36,4 +36,4 @@ def build_temp_files( element , ndir ):
     with open(imports_path, 'w') as f:
         f.write('import Layout from "'+path_fix+'../modules/Layout/Layout";\nimport { SEO } from "'+path_fix+'../modules/SEO/SEO";\n')
         for organismo in organismos:
-            f.write('import { '+organismo+' } from "'+path_fix+'../sections/'+organismo+'/'+organismo+';"\n')
+            f.write('import { '+organismo+' } from "'+path_fix+'../sections/'+organismo+'/'+organismo+'";\n')
