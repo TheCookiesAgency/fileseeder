@@ -61,7 +61,7 @@ with open(md_path, 'r') as structure:
         if template_match:
             camelName = template_match.group(1)
             if args.backoffice == False:
-                build_temp_files(camelName, 1)
+                build_temp_files(camelName, 0)
                 if args.force:
                     if page_match_traduccion:
                         fileseeder("gtemp", camelName, kebabTraduccion, True, True)
