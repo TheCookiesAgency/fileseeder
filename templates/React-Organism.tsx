@@ -3,7 +3,8 @@ import { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props${NAME} = PropsWithChildren<{
-    data ?: string | null | undefined;
+    data: Partial<Sanity${NAME}>;
+    settings?: any;
 }>
 
 const ${NAME}: React.FC<Props${NAME}> = (props: Props${NAME}) => {

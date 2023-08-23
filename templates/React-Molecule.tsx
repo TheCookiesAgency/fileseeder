@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props${NAME} = PropsWithChildren<{
-    element: string;
+    data: unknown;
 }>
 
 const ${NAME}: React.FC<Props${NAME}> = (props: Props${NAME}) => {
