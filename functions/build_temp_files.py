@@ -1,7 +1,7 @@
 import os
 
 
-def build_temp_files( element , ndir ):
+def build_temp_files( element ):
 
     root_path = os.getcwd()
     md_path = os.path.join(root_path, 'structure.md')
@@ -13,7 +13,7 @@ def build_temp_files( element , ndir ):
         organismos = []
 
         for line in file:
-            if line.strip().startswith('# **'+element+'**'):
+            if line.strip().startswith('# '+element):
                 for line in file:
                     if line.startswith('## '):
                         organismos.append(line[2:].strip())
@@ -23,17 +23,12 @@ def build_temp_files( element , ndir ):
 
     with open(layout_path, 'w') as f:
         for organismo in organismos:
-            f.write('      <'+organismo+' />\n')
+            f.write('      <'+organismo+' data={data.page?.'+organismo+' as Queries.Sanity'+organismo+'} />\n')
 
     organismos.sort()
 
-    path_fix = ""
-    ndir = int(ndir)
 
-    for i in range(ndir):
-        path_fix = path_fix + "../"
 
     with open(imports_path, 'w') as f:
-        f.write('import Layout from "'+path_fix+'../modules/Layout/Layout";\nimport { SEO } from "'+path_fix+'../modules/SEO/SEO";\n')
         for organismo in organismos:
-            f.write('import { '+organismo+' } from "'+path_fix+'../sections/'+organismo+'/'+organismo+'";\n')
+            f.write('import { '+organismo+' } from "../sections/'+organismo+'/'+organismo+'";\n')

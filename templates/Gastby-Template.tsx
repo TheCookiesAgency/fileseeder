@@ -3,6 +3,7 @@ import React from "react";
 
 import Layout from "../modules/Layout/Layout";
 import { SEO } from "../modules/SEO/SEO";
+${IMPORTS}
 import { ILink, IPageProps } from "../types/thecookies";
 
 const ${namePage} = ({ data }: IPageProps<Queries.${namePage}Query>) => {

@@ -27,57 +27,36 @@ sys.stdout = open(his_path, 'w')
 
 with open(md_path, 'r') as structure:
     for linea in structure:
+        template_match_default = re.search(r'^# (\w+)$', linea)
         page_match = re.search(r'^# \*\*(\w+)\*\*', linea)
         page_match_default = re.search(r'^# \*\*(\w+)\*\*$', linea)
-        page_match_traduccion = re.search(r'^# \*\*(\w+)\*\* - ', linea)
-        if page_match:
-            camelName = page_match.group(1)
-            ndir = 0
-            if page_match_traduccion:
-                kebabTraduccion = linea.split(' - ')[1]
-                for char in kebabTraduccion:
-                    if char == "/":
-                        ndir += 1
-            if args.backoffice == False:
-                build_temp_files(camelName, ndir)
-                if args.force:
-                    if page_match_traduccion:
-                        fileseeder("gpag", camelName, kebabTraduccion, True, True)
-                    if page_match_default:
-                        fileseeder("gpag", camelName, None, True)
-                    fileseeder("land", camelName, None, True)
-                if page_match_traduccion:
-                    fileseeder("gpag", camelName, kebabTraduccion, False, True)
-                if page_match_default:
-                    fileseeder("gpag", camelName)
-                fileseeder("land", camelName)
-            if args.web == False:
-                if args.force:
-                    fileseeder("sdoc", camelName, None, True)
-                fileseeder("sdoc", camelName)
-        template_match = re.search(r'^# (\w+)', linea)
-        template_match_default = re.search(r'^# (\w+)$', linea)
+        if template_match_default:
+            camelName = template_match_default.group(1)
+            build_temp_files(camelName)
+            fileseeder("sdoc", camelName)
+            fileseeder("land", camelName)
+            fileseeder("gtemp", camelName)
+#         if page_match:
+#             ndir = 0
+#             if args.backoffice == False:
+# #                 build_temp_files(camelName, ndir)
+#                 if args.force:
+#                     if page_match_default:
+#                         fileseeder("gpag", camelName, None, True)
+#                     fileseeder("land", camelName, None, True)
+#                 if page_match_default:
+#                     fileseeder("gpag", camelName)
+#                 fileseeder("land", camelName)
+#             if args.web == False:
+#                 if args.force:
+#                     fileseeder("sdoc", camelName, None, True)
+#                 fileseeder("sdoc", camelName)
+
         # template_match_traduccion = re.search(r'^# (\w+) - ', linea)
-        if template_match:
-            camelName = template_match.group(1)
-            if args.backoffice == False:
-                build_temp_files(camelName, 0)
-                if args.force:
-                    if page_match_traduccion:
-                        fileseeder("gtemp", camelName, kebabTraduccion, True, True)
-                    if page_match_default:
-                        fileseeder("gtemp", camelName, None, True)
-                    fileseeder("land", camelName, None, True)
-                if template_match_default:
-                    fileseeder("gtemp", camelName)
-                fileseeder("land", camelName)
-            if args.web == False:
-                if args.force:
-                    fileseeder("sdoc", camelName, None, True)
-                fileseeder("sdoc", camelName)
         organism_match = re.search(r'^## (\w+)$', linea)
         if organism_match:
             camelName = organism_match.group(1)
+            build_temp_files(camelName)
             if args.backoffice == False:
                 if args.force:
                     fileseeder("org", camelName, None, True)
