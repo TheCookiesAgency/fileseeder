@@ -45,6 +45,7 @@ export const query = graphql`
     query ${namePage}($language: String = "es_es") {
         page: sanityHome(language: { eq: $language }) {
             ...seo
+            ${QUERIES}
         }
         about: sanityAbout(language: { eq: $language }) {
             ...menu
