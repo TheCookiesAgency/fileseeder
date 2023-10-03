@@ -2,12 +2,15 @@ import * as React from "react";
 import { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 
+import DoNotMountComponent from "../../modules/DoNotMountComponent/DoNotMountComponent";
+
 type Props${NAME} = PropsWithChildren<{
-    data: Partial<Sanity${NAME}>;
-    settings?: any;
+    data: Partial<Queries.Sanity${NAME}>;
+    settings?: unknown;
 }>
 
 const ${NAME}: React.FC<Props${NAME}> = (props: Props${NAME}) => {
+    if (!props.data) return <DoNotMountComponent sms={"${NAME}"} log={props} />;
 const { t } = useTranslation("global")
   return (
     <section className={`o-${className}`}>

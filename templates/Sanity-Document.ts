@@ -1,28 +1,16 @@
-import {defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity';
+import { prototype } from "./base/prototype";
+
 
 export default defineType({
   name: '${NAME}',
   title: '${TITLE}',
   type: 'document',
-  fields: [
-    defineField({
-      name: 'name',
-      title: 'Nombre',
-      type: 'string'
-    }),
-    defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: 'name',
-        maxLength: 96,
-        isUnique: (value, context) => context.defaultIsUnique(value, context)
-      }
-    }),
-  ],
+  fields: [...prototype],
   preview: {
     select: {
       title: 'name',
+      subtitle: "language",
     }
   }
 })
