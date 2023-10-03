@@ -74,7 +74,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         destination_path = gpag_path
         camelName = camelName + "Page"
     if tipo == "gtemp":
-        tsx_file = os.path.join(fs_path, 'templates/Gastby-Layout.tsx')
+        tsx_file = os.path.join(fs_path, 'templates/Gastby-Template.tsx')
         destination_path = gtemp_path
         camelName = camelName + "Template"
     if tipo == "land":
