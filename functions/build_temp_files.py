@@ -23,7 +23,8 @@ def build_temp_files( element ):
 
     with open(layout_path, 'w') as f:
         for organismo in organismos:
-            f.write('      <'+organismo+' data={data.page?.'+organismo+' as Queries.Sanity'+organismo+'} />\n')
+            organismo_lower = organismo[0].lower() + organismo[1:]
+            f.write('      <'+organismo+' data={data.page?.'+organismo_lower+' as Queries.Sanity'+organismo+'} />\n')
 
     organismos.sort()
 
