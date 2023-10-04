@@ -25,6 +25,8 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     # Definir la ruta donde se encontrará el layout y los imports temporales en caso de gastby
     layout_path = os.path.join(root_path, 'temp_layout_fs.tsx')
     imports_path = os.path.join(root_path, 'temp_imports_fs.tsx')
+    imports_documents_path = os.path.join(root_path, 'temp_imports_fields_fs.ts')
+    documents_fields_path = os.path.join(root_path, 'temp_documents_fields_fs.ts')
     queries_path = os.path.join(root_path, 'temp_queries_fs.tsx')
 
     # Definir variables de posibles archivos
@@ -183,6 +185,18 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
             if ts_file is not None:
                 with open(ts_file, 'r') as reference_file:
                     code = reference_file.read().replace('${NAME}', camelName)
+                    if os.path.exists(documents_fields_path) and os.path.exists(imports_documents_path):
+                        with open(documents_fields_path, 'r') as tempFieldsDocs:
+                            fields = tempFieldsDocs.read().strip()
+                        with open(imports_documents_path, 'r') as tempImportsDocuments:
+                            imports = tempImportsDocuments.read().strip()
+                        code = code.replace('${FIELDS}', fields)
+                        code = code.replace('${IMPORTS}', imports)
+                        os.remove(documents_fields_path)
+                        os.remove(imports_documents_path)
+                    else:
+                        code = code.replace('${FIELDS}', "No encuentra fields")
+                        code = code.replace('${IMPORTS}', "No encuentra imports")
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
                 print(f'{file_path} creado')

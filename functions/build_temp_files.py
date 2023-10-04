@@ -1,5 +1,5 @@
 import os
-
+from .camel_to_kebab import camel_to_kebab
 
 def build_temp_files( element ):
 
@@ -9,6 +9,8 @@ def build_temp_files( element ):
     imports_path = os.path.join(root_path, 'temp_imports_fs.tsx')
     queries_path = os.path.join(root_path, 'temp_queries_fs.tsx')
     schemas_path = os.path.join(root_path, 'temp_schemas_fs.tsx')
+    documents_fields_path = os.path.join(root_path, 'temp_documents_fields_fs.ts')
+    documents_imports_path = os.path.join(root_path, 'temp_imports_fields_fs.ts')
 
     with open(md_path, "r") as file:
 
@@ -48,3 +50,13 @@ def build_temp_files( element ):
             for organismo in organismos:
                 organismo_lower = organismo[0].lower() + organismo[1:]
                 f.write(organismo_lower + '{... on Sanity'+organismo+' {name slug { current}}\n \n } \n')
+
+    with open(documents_fields_path, 'w') as f:
+        for organismo in organismos:
+            organismo_lower = organismo[0].lower() + organismo[1:]
+            f.write('\ndefineField({\n name: "'+organismo_lower+'",\n title: "'+organismo+'",\ngroup: "content",\ntype: '+organismo_lower+'.name,\n}),')
+
+    with open(documents_imports_path, 'w') as f:
+        for organismo in organismos:
+            organismo_lower = organismo[0].lower() + organismo[1:]
+            f.write('\nimport '+organismo_lower+' from "./objects/'+camel_to_kebab(organismo)+'";')

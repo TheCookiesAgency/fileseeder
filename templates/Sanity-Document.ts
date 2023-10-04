@@ -1,12 +1,14 @@
 import {defineField, defineType} from 'sanity';
 import { landing } from "./base/landing";
-
+${IMPORTS}
 
 export default defineType({
   name: '${NAME}',
-  title: '${TITLE}',
+  title: '${NAME}',
   type: 'document',
-  fields: [...landing],
+  fields: [
+      ...landing,
+    ${FIELDS}],
   preview: {
     select: {
       title: 'name',
