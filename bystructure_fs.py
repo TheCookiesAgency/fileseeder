@@ -81,10 +81,10 @@ with open(md_path, 'r') as structure:
                 
 sys.stdout.close()
 build_temp_files_sanity()
-fs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-template_index = os.path.join(root_path, "templates/Sanity-Index.ts")
-all_imports_sanity_path = os.path.join(root_path, 'temp_all_imports_sanity_fs.ts')
-documents_n_objects_fields_path = os.path.join(root_path, 'temp_documents_n_objects_fields_fs.ts')
+fs_path = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+template_index = os.path.join(fs_path, "templates/Sanity-Index.ts")
+all_imports_sanity_path = os.path.join(fs_path, 'temp_all_imports_sanity_fs.ts')
+documents_n_objects_fields_path = os.path.join(fs_path, 'temp_documents_n_objects_fields_fs.ts')
 
 with open(template_index, 'r') as template_ts:
     code = template_ts.read()
