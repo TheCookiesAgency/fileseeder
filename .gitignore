@@ -162,3 +162,9 @@ node_modules/
 components/
 web/
 backoffice/
+/temp_imports_fs.tsx
+/temp_layout_fs.tsx
+/temp_queries_fs.tsx
+/temp_schemas_fs.tsx
+/temp_documents_fields_fs.ts
+/temp_imports_fields_fs.ts
