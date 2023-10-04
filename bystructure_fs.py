@@ -4,6 +4,7 @@ import argparse
 import sys
 from functions.build_temp_files import build_temp_files
 from functions.fileseeder import fileseeder
+from create_schema_sanity import build_temp_files_sanity
 import subprocess
 
 root_path = os.getcwd()
@@ -79,7 +80,25 @@ with open(md_path, 'r') as structure:
                 fileseeder("mol", camelName)
                 
 sys.stdout.close()
+build_temp_files_sanity()
+template_index = os.path.join(root_path, "templates/Sanity-Index.ts")
+all_imports_sanity_path = os.path.join(root_path, 'temp_all_imports_sanity_fs.ts')
+documents_n_objects_fields_path = os.path.join(root_path, 'temp_documents_n_objects_fields_fs.ts')
 
+with open(template_index, 'r') as template_ts:
+    code = template_ts.read()
+    if os.path.exists(all_imports_sanity_path) and os.path.exists(documents_n_objects_fields_path) :
+        with open(all_imports_sanity_path, 'r') as tempImportLine:
+            imports = tempImportLine.read().strip()
+        with open(documents_n_objects_fields_path, 'r') as tempDocsObjsLine:
+            docs_n_objs = tempDocsObjsLine.read().strip()
+        code = code.replace('${IMPORTS}', imports)
+        code = code.replace('${OBJECTS}', docs_n_objs)
+        os.remove(all_imports_sanity_path)
+        os.remove(documents_n_objects_fields_path)
+        file_path = os.path.join(root_path, "backoffice/schemas/schema.ts")
+        with open(file_path, 'w') as new_file:
+            new_file.write(code)
 if args.show:
     subprocess.call(["python3", rs_path , "--show" ])
 else:

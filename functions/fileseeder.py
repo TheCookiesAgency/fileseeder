@@ -28,6 +28,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     imports_documents_path = os.path.join(root_path, 'temp_imports_fields_fs.ts')
     documents_fields_path = os.path.join(root_path, 'temp_documents_fields_fs.ts')
     queries_path = os.path.join(root_path, 'temp_queries_fs.tsx')
+    index_sanity_path = os.path.join(root_path, 'temp_sanity_index_fs.tsx')
 
     # Definir variables de posibles archivos
     scss_file = None
