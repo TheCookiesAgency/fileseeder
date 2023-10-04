@@ -1,6 +1,6 @@
 ${IMPORTS}
 
-export const schemaTypes = [
+export const schemaTypesGenerated = [
    // objects
    ${OBJECTS}
 ];
