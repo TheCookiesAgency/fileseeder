@@ -28,14 +28,19 @@ sys.stdout = open(his_path, 'w')
 with open(md_path, 'r') as structure:
     for linea in structure:
         template_match_default = re.search(r'^# (\w+)$', linea)
-        page_match = re.search(r'^# \*\*(\w+)\*\*', linea)
-        page_match_default = re.search(r'^# \*\*(\w+)\*\*$', linea)
+        prototype_match_default = re.search(r'^# \* (\w+)$', linea)
         if template_match_default:
             camelName = template_match_default.group(1)
             build_temp_files(camelName)
             fileseeder("sdoc", camelName)
             fileseeder("land", camelName)
             fileseeder("gtemp", camelName)
+        if prototype_match_default:
+            camelName = prototype_match_default.group(1)
+            build_temp_files(camelName)
+            fileseeder("sdoc-prototype", camelName)
+            fileseeder("land", camelName)
+            fileseeder("gprototype", camelName)
 #         if page_match:
 #             ndir = 0
 #             if args.backoffice == False:

@@ -41,6 +41,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     
     #Primera letra siempre mayúscula
     camelName = alpha_filter(camelName)
+    camelNameWithoutPrefix = camelName
     camelName = camelName[0].upper() + camelName[1:]
 
     # Restricción de la variable type y definir archivos y directorio
@@ -63,6 +64,11 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         ts_file = os.path.join(fs_path, 'templates/Sanity-Document.ts')
         destination_path = sdoc_path
 
+    if tipo == "sdoc-prototype":
+        ts_file = os.path.join(fs_path, 'templates/Sanity-Document-Prototype.ts')
+        destination_path = sdoc_path
+
+
         # Restricción del nombre index en documento de Sanity
         if camelName == "Index":
             camelName = "Home"
@@ -75,35 +81,24 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         destination_path = gpag_path
         camelName = camelName + "Page"
     if tipo == "gtemp":
-        tsx_file = os.path.join(fs_path, 'templates/Gastby-Template.tsx')
+        tsx_file = os.path.join(fs_path, 'templates/Gastby-Template-Info.tsx')
+        destination_path = gtemp_path
+        camelName = camelName + "Template"
+    if tipo == "gprototype":
+        tsx_file = os.path.join(fs_path, 'templates/Gastby-Template-Prototype.tsx')
         destination_path = gtemp_path
         camelName = camelName + "Template"
     if tipo == "land":
         scss_file = os.path.join(fs_path, 'templates/Class-Landing.scss')
         destination_path = land_path
-    if tipo not in ["org", "mol", "atom", "sdoc", "sobj", "gpag", "gtemp", "land"]:
+    if tipo not in ["org", "mol", "atom", "sdoc", "sobj", "gpag", "gtemp", "land", "gprototype", "sdoc-prototype"]:
         print(f'Debes especificar que quieres crear')
         return
 
     # Creación de la variable kebabName
     kebabName = camel_to_kebab(camelName)
 
-    # Definir variable canonTraduccion en caso de que sea None
-    if camelTraduccion == None:
-        camelTraduccion = camelName
 
-    # Si en structure.md se especifica una ruta se creará dentro de la ruta correspondiente
-    if renameFile and '/' in camelTraduccion:
-        is_folder = True
-        new_folder = camelTraduccion[:len(camelTraduccion) - len(camelTraduccion.split('/')[-1]) - 1]
-        camelTraduccion = camelTraduccion.split('/')[-1]
-
-    # Creación de la variable kebabName
-    kebabTraduccion = camel_to_kebab(camelTraduccion)
-
-    # Eliminamos el salto de línea en caso de que venga desde structure.md
-    if renameFile:
-        kebabTraduccion = kebabTraduccion[:-1]
 
     # Definir carpeta del componente
     if is_folder:
@@ -119,10 +114,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         else:
             file_path = os.path.join(destination_path, kebabName + ".scss")
     if tsx_file is not None:
-        if renameFile:
-            file_path = os.path.join(destination_path, kebabTraduccion + ".tsx")
-        else:
-            file_path = os.path.join(destination_path, camelName + ".tsx")
+        file_path = os.path.join(destination_path, camelName + ".tsx")
     if ts_file is not None:
         file_path = os.path.join(destination_path, kebabName + ".ts")
 
@@ -151,10 +143,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                 with open(scss_file, 'r') as reference_file:
                     code = reference_file.read().replace('${NAME}', kebabName)
                 if is_folder:
-                    if renameFile:
-                        file_path = os.path.join(destination_path, kebabTraduccion + ".scss")
-                    else:
-                        file_path = os.path.join(destination_path, kebabName + ".scss")
+                    file_path = os.path.join(destination_path, kebabName + ".scss")
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
                 print(f'{file_path} creado')
@@ -166,6 +155,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                     code = code.replace('${DIR_PATH}', rel_path)
                     code = code.replace('${FILE_NAME}', camelName + ".tsx")
                     code = code.replace('${namePage}', camelName)
+                    code = code.replace('${nameWithOutPrefix}', camelNameWithoutPrefix)
                     if os.path.exists(layout_path) and os.path.exists(imports_path) and os.path.exists(queries_path):
                         with open(layout_path, 'r') as tempLayoutLine:
                             layout = tempLayoutLine.read().strip()
@@ -184,10 +174,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                         code = code.replace('${IMPORTS}', "")
                         code = code.replace('${QUERIES}', "")
                 if is_folder:
-                    if renameFile:
-                        file_path = os.path.join(destination_path, kebabTraduccion + ".tsx")
-                    else:
-                        file_path = os.path.join(destination_path, camelName + ".tsx")
+                    file_path = os.path.join(destination_path, camelName + ".tsx")
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
                 print(f'{file_path} creado')
@@ -196,7 +183,6 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
             if ts_file is not None:
                 with open(ts_file, 'r') as reference_file:
                     code = reference_file.read().replace('${NAME}', camelName)
-                    code = code.replace('${TITLE}', kebabTraduccion)
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
                 print(f'{file_path} creado')

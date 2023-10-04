@@ -43,9 +43,17 @@ export const Head = ({ data }: IPageProps<Queries.${namePage}Query>) => (
 
 export const query = graphql`
     query ${namePage}($language: String = "es_es") {
-        page: sanityHome(language: { eq: $language }) {
+        page: sanity${nameWithOutPrefix}(language: { eq: $language }) {
             ...seo
             ${QUERIES}
+        }
+        hrefLangList: allSanity${nameWithOutPrefix} {
+            nodes {
+                language
+                slug {
+                    current
+                }
+            }
         }
         about: sanityAbout(language: { eq: $language }) {
             ...menu
