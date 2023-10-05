@@ -6,7 +6,7 @@ import { SEO } from "../modules/SEO/SEO";
 ${IMPORTS}
 import { ILink, IPageProps } from "../types/thecookies";
 
-const ${namePage} = ({ data }: IPageProps<Queries.${namePage}Query>) => {
+const ${namePage} = ({ data, pageContext }: IPageProps<Queries.${namePage}Query>) => {
     const menu: ILink[] = [
         { name: data.about?.name, slug: getSlugWithLang(data.about?.slug, pageContext.language) },
         { name: data.contact?.name, slug: getSlugWithLang(data.contact?.slug, pageContext.language) },
