@@ -54,7 +54,7 @@ def build_temp_files( element ):
     with open(documents_fields_path, 'w') as f:
         for organismo in organismos:
             organismo_lower = organismo[0].lower() + organismo[1:]
-            f.write('\ndefineField({\n name: "'+organismo_lower+'",\n title: "'+organismo+'",\ngroup: "content",\ntype: '+organismo_lower+'.name,\n}),')
+            f.write('\ndefineField({\n name: "'+organismo_lower+'",\n title: "'+organismo+'",\ngroup: "content", \n options: {\n collapsible: true,\n collapsed: true,\n},\ntype: '+organismo_lower+'.name,\n}),')
 
     with open(documents_imports_path, 'w') as f:
         for organismo in organismos:
