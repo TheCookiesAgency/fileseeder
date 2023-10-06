@@ -47,7 +47,7 @@ export const query = graphql`
             ...seo
             ${QUERIES}
         }
-        hrefLangList: allSanity${nameWithOutPrefix}(filter: { reference: { id: { eq: $reference } } }) {
+        hrefLangList: allSanity${nameWithOutPrefix}(filter: { ref: { eq: $reference } }) {
             nodes {
                 language
                 slug {
