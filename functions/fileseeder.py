@@ -49,37 +49,44 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         destination_path = org_path
         is_folder = True
         new_folder = camelName
-    if tipo == "mol":
+        file_extension = ".astro"  # Change file extension to .astro for Organism
+if tipo == "mol":
         scss_file = os.path.join(fs_path, 'templates/Class-Molecule.scss')
         tsx_file = os.path.join(fs_path, 'templates/React-Molecule.tsx')
         destination_path = mol_path
         is_folder = True
         new_folder = camelName
+        file_extension = ".tsx"
     if tipo == "atom":
         scss_file = os.path.join(fs_path, 'templates/Class-Atom.scss')
         destination_path = atom_path
+        file_extension = ".scss"
     if tipo == "sdoc":
         ts_file = os.path.join(fs_path, 'templates/Sanity-Document.ts')
         destination_path = sdoc_path
 
-        # Restricción del nombre index en documento de Sanity
         if camelName == "Index":
             camelName = "Home"
+            file_extension = ".ts"
             
     if tipo == "sobj":
         ts_file = os.path.join(fs_path, 'templates/Sanity-Object.ts')
         destination_path = sobj_path
+        file_extension = ".ts"
     if tipo == "gpag":
         tsx_file = os.path.join(fs_path, 'templates/Gastby-Layout.tsx')
         destination_path = gpag_path
-        camelName = camelName + "Page"
+        camelName = "[..." + camelName + "]" + ""
+        file_extension = ".astro"
     if tipo == "gtemp":
         tsx_file = os.path.join(fs_path, 'templates/Gastby-Layout.tsx')
         destination_path = gtemp_path
-        camelName = camelName + "Template"
+        camelName = "[..." + camelName + "]" + ""
+        file_extension = ".astro"
     if tipo == "land":
         scss_file = os.path.join(fs_path, 'templates/Class-Landing.scss')
         destination_path = land_path
+        file_extension = ".scss"
     if tipo not in ["org", "mol", "atom", "sdoc", "sobj", "gpag", "gtemp", "land"]:
         print(f'Debes especificar que quieres crear')
         return
@@ -121,7 +128,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         if renameFile:
             file_path = os.path.join(destination_path, kebabTraduccion + ".tsx")
         else:
-            file_path = os.path.join(destination_path, camelName + ".tsx")
+            file_path = os.path.join(destination_path, camelName + file_extension)
     if ts_file is not None:
         file_path = os.path.join(destination_path, kebabName + ".ts")
 
@@ -163,7 +170,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                 with open(tsx_file, 'r') as reference_file:
                     code = reference_file.read().replace('${NAME}', camelName).replace('${className}', kebabName)
                     code = code.replace('${DIR_PATH}', rel_path)
-                    code = code.replace('${FILE_NAME}', camelName + ".tsx")
+                    code = code.replace('${FILE_NAME}', camelName + file_extension)
                     code = code.replace('${namePage}', camelName)
                     if os.path.exists(layout_path) and os.path.exists(imports_path):
                         with open(layout_path, 'r') as tempLayoutLine:
@@ -179,9 +186,9 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                         code = code.replace('${IMPORTS}', "")
                 if is_folder:
                     if renameFile:
-                        file_path = os.path.join(destination_path, kebabTraduccion + ".tsx")
+                        file_path = os.path.join(destination_path, kebabTraduccion + file_extension)
                     else:
-                        file_path = os.path.join(destination_path, camelName + ".tsx")
+                        file_path = os.path.join(destination_path, camelName + file_extension)
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
                 print(f'{file_path} creado')

@@ -1,25 +1,29 @@
-import { graphql, PageProps } from "gatsby";
-import React from "react";
+---
+import { getCollection} from "astro:content";
+import { getSlugWithLang } from "@/translations/modules/getSlugWithLang";
+import { type ${namePage} } from "@/shared/sanity/sanity.types";
+import Layout from "../astro/layouts/Layout.astro";
+import {type PrototypePageData} from "@/shared/utils/thecookies";
 
-import Layout from "../modules/Layout/Layout";
-import { SEO } from "../modules/SEO/SEO";
 
-const ${namePage} = ({ data }: PageProps<Queries.${namePage}Query>) => {
-  return (
-    <Layout>
-${LAYOUT}
-    </Layout>
-  )
+interface Props {
+    data: PrototypePageData<${namePage}>;
 }
 
-export default ${namePage};
+export async function getStaticPaths() {
+    const landingsList = await getCollection("legalsInSanity");
+    return landingsList.map((landing) => ({
+        params: {
+    ${namePage}: `${getSlugWithLang(landing.data.slug, landing.data.language)}`,
+},
+    props: { data: landing.data },
+}));
+}
+const { data } = Astro.props;
 
-export const Head = () => <SEO />;
 
-export const query = graphql`
-    query ${namePage}{
-        site {
-            buildTime(formatString: "YYYY-MM-DD hh:mm a z")
-        }
-    }
-`;
+---
+
+    <Layout id={data._id}>
+        ${LAYOUT}
+    </Layout>

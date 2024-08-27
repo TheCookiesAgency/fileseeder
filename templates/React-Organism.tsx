@@ -1,28 +1,18 @@
-import * as React from "react";
-import { PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
+---
+import {sanityClient} from "sanity:client";
+import type { ${NAME} } from "@/shared/sanity/sanity.types";
 
-type Props${NAME} = PropsWithChildren<{
-    data: Partial<Sanity${NAME}>;
-    settings?: any;
-}>
 
-const ${NAME}: React.FC<Props${NAME}> = (props: Props${NAME}) => {
-const { t } = useTranslation("global")
-  return (
-    <section className={`o-${className}`}>
-      <div className={`c-${className}`}>
-          <h1>Hola! soy ${NAME},</h1>
-          <p>
-            Puedes encontrarme en ${DIR_PATH} como ${FILE_NAME}
-          </p>
-          <blockquote>{t("global.name")}</blockquote>
-          <p>
-            y mi flow parte de esta clase o-${className}, en el mismo dir :)
-          </p>
-      </div>
-    </section>
-  );
-};
+const {  id} = Astro.props;
+// change firsLetter to lowercase in query
+const data = await sanityClient.fetch<{ ${NAME} }>(
+    `*[_id == "${id}" ][0]{ ...${NAME}}`,
+);
 
-export {${NAME}};
+ ---
+<section class={`o-${className}`}>
+  <div class={`c-${className}`}>
+      <h1>Hola! soy ${NAME},</h1>
+      <pre>{JSON.stringify(data,  null, 2)}</pre>
+  </div>
+</section>

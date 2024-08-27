@@ -1,5 +1,4 @@
-import * as React from "react";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props${NAME} = PropsWithChildren<{
@@ -7,7 +6,6 @@ type Props${NAME} = PropsWithChildren<{
 }>
 
 const ${NAME}: React.FC<Props${NAME}> = (props: Props${NAME}) => {
-  const { t } = useTranslation("global")
   return (
     <div className={`m-${className}`}>
       <h2>Hola! soy ${NAME}, una molécula</h2>
