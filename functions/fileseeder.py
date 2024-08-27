@@ -19,7 +19,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     sdoc_path = os.path.join(root_path, 'backoffice/schemas')
     sobj_path = os.path.join(root_path, 'backoffice/schemas/objects')
     gpag_path = os.path.join(root_path, 'web/src/pages')
-    gtemp_path = os.path.join(root_path, 'web/src/templates')
+    gtemp_path = os.path.join(root_path,  'web/src/pages')
     land_path = os.path.join(root_path, 'web/src/styles/layouts')
 
     # Definir la ruta donde se encontrará el layout y los imports temporales en caso de gastby
@@ -50,17 +50,19 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         is_folder = True
         new_folder = camelName
         file_extension = ".astro"  # Change file extension to .astro for Organism
-if tipo == "mol":
+    if tipo == "mol":
         scss_file = os.path.join(fs_path, 'templates/Class-Molecule.scss')
         tsx_file = os.path.join(fs_path, 'templates/React-Molecule.tsx')
         destination_path = mol_path
         is_folder = True
         new_folder = camelName
         file_extension = ".tsx"
+
     if tipo == "atom":
         scss_file = os.path.join(fs_path, 'templates/Class-Atom.scss')
         destination_path = atom_path
         file_extension = ".scss"
+
     if tipo == "sdoc":
         ts_file = os.path.join(fs_path, 'templates/Sanity-Document.ts')
         destination_path = sdoc_path
@@ -73,20 +75,22 @@ if tipo == "mol":
         ts_file = os.path.join(fs_path, 'templates/Sanity-Object.ts')
         destination_path = sobj_path
         file_extension = ".ts"
+
     if tipo == "gpag":
         tsx_file = os.path.join(fs_path, 'templates/Gastby-Layout.tsx')
         destination_path = gpag_path
-        camelName = "[..." + camelName + "]" + ""
         file_extension = ".astro"
+
     if tipo == "gtemp":
         tsx_file = os.path.join(fs_path, 'templates/Gastby-Layout.tsx')
         destination_path = gtemp_path
-        camelName = "[..." + camelName + "]" + ""
         file_extension = ".astro"
+
     if tipo == "land":
         scss_file = os.path.join(fs_path, 'templates/Class-Landing.scss')
         destination_path = land_path
         file_extension = ".scss"
+
     if tipo not in ["org", "mol", "atom", "sdoc", "sobj", "gpag", "gtemp", "land"]:
         print(f'Debes especificar que quieres crear')
         return

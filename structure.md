@@ -11,7 +11,7 @@
 ## FaqList
 ### Faq
 
-# **AboutMe** - sobre-mí
+# **AboutMe**
 ## Hero
 ## Bio
 ## Reviews
@@ -32,7 +32,7 @@
 ## RateAndPayment
 ## FaqList
 
-# **OnlineConsultation** - servicios/consulta-online
+# **OnlineConsultation**
 ## Hero
 ## HowOnlineTherapyWorks
 ### Point
