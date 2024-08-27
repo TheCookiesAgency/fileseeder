@@ -24,8 +24,6 @@ const { data } = Astro.props;
 
 ---
 
-    LAYOUT
-
     <Layout id={data._id}>
 ${LAYOUT}
     </Layout>

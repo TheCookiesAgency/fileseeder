@@ -11,7 +11,7 @@
 ## FaqList
 ### Faq
 
-# **Home**
+# Home
 ## Hero
 ## CarouselCars
 ### AutoCard

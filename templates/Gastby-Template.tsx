@@ -23,7 +23,7 @@ const { data } = Astro.props;
 
 
  ---
-TEMPLATE
+
 <Layout id={data._id}>
 ${LAYOUT}
 </Layout>
