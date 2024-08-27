@@ -25,5 +25,5 @@ const { data } = Astro.props;
 ---
 
     <Layout id={data._id}>
-        ${LAYOUT}
+${LAYOUT}
     </Layout>
