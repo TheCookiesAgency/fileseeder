@@ -11,10 +11,10 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-    const landingsList = await getCollection("legalsInSanity");
+    const landingsList = await getCollection("${lowerCamelName}");
     return landingsList.map((landing) => ({
         params: {
-                ${namePage}: `${getSlugWithLang(landing.data.slug, landing.data.language)}`,
+    ${lowerCamelName}: `${getSlugWithLang(landing.data.slug, landing.data.language)}`,
         },
         props: { data: landing.data },
     }));

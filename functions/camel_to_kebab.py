@@ -5,3 +5,15 @@ def camel_to_kebab(string):
     if kebab[0] == '-':
         kebab = kebab[1:]
     return kebab
+
+
+def pascal_to_camel(string):
+    # Si la cadena está vacía o tiene solo un carácter, la devolvemos tal cual
+    if len(string) <= 1:
+        return string.lower()
+    
+    # Convertimos el primer carácter a minúscula
+    camel = string[0].lower() + string[1:]
+    
+    return camel
+

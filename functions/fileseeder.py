@@ -1,6 +1,6 @@
 import os
 import re
-from .camel_to_kebab import camel_to_kebab
+from .camel_to_kebab import camel_to_kebab, pascal_to_camel
 from .delete_dir import delete_dir
 from .alpha_filter import alpha_filter
 
@@ -41,6 +41,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     #Primera letra siempre mayúscula
     camelName = alpha_filter(camelName)
     camelName = camelName[0].upper() + camelName[1:]
+    lowerCamelName = pascal_to_camel(camelName)
 
     # Restricción de la variable type y definir archivos y directorio
     if tipo == "org":
@@ -129,10 +130,14 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         else:
             file_path = os.path.join(destination_path, kebabName + ".scss")
     if tsx_file is not None:
-        if renameFile:
+        if tipo == "gpag" or tipo == "gtemp":
+            spreadFile = "[..." + lowerCamelName + "]"
+            file_path = os.path.join(destination_path, spreadFile + file_extension)
+        elif renameFile:
             file_path = os.path.join(destination_path, kebabTraduccion + ".tsx")
         else:
             file_path = os.path.join(destination_path, camelName + file_extension)
+            
     if ts_file is not None:
         file_path = os.path.join(destination_path, kebabName + ".ts")
 
@@ -172,7 +177,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
             # Crear archivo TSX
             if tsx_file is not None:
                 with open(tsx_file, 'r') as reference_file:
-                    code = reference_file.read().replace('${NAME}', camelName).replace('${className}', kebabName)
+                    code = reference_file.read().replace('${NAME}', camelName).replace('${className}', kebabName).replace('${lowerCamelName}', lowerCamelName)
                     code = code.replace('${DIR_PATH}', rel_path)
                     code = code.replace('${FILE_NAME}', camelName + file_extension)
                     code = code.replace('${namePage}', camelName)

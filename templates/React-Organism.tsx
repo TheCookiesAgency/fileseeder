@@ -6,7 +6,7 @@ import type { ${NAME} } from "@/shared/sanity/sanity.types";
 const {  _id} = Astro.props;
 // change firsLetter to lowercase in query
 const data = await sanityClient.fetch<{ ${NAME} }>(
-    `*[_id == "${_id}" ][0]{ ...${NAME}}`,
+    `*[_id == "${_id}" ][0]{ ...${lowerCamelName}}`,
 );
 
  ---
