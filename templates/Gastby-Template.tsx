@@ -18,15 +18,15 @@ export async function getStaticPaths() {
     return landingsList.map((landing) => ({
         params: {
     ${lowerCamelName}: `${getSlugWithLang(landing.data.slug, landing.data.language)}`,
-        },
-        props: { data: landing.data },
-    }));
+},
+    props: { data: landing.data, sharedId: sharedList[0]._id },
+}));
 }
 const { data, sharedId } = Astro.props;
 
 
- ---
+---
 
-<Layout id={data._id}>
-${LAYOUT}
-</Layout>
+    <Layout id={data._id}>
+        ${LAYOUT}
+    </Layout>
