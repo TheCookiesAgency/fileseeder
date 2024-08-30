@@ -1,4 +1,9 @@
-const ${NAME}: React.FC<${NAME}> = (props: ${NAME}) => {
+
+type Props${NAME} = {
+    data: unknown;
+}
+
+const ${NAME}: React.FC<${NAME}> = (props: Props${NAME}) => {
   return (
     <div className={`m-${className}`}>
       <h2>Hola! soy ${NAME}, una molécula</h2>
