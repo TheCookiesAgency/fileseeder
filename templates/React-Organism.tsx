@@ -1,5 +1,4 @@
 ---
-import {sanityClient} from "sanity:client";
 import type { ${NAME} } from "@/shared/sanity/sanity.types"
 import {getHtmlSimpleCopy} from "@/shared/utils/get-html-render";
 
@@ -12,10 +11,8 @@ interface Props {
 }
 
 const {  _id, headingLevel } = Astro.props;
-// change firsLetter to lowercase in query
-const data = await sanityClient.fetch<${NAME}>(
-    `*[_id == "${_id}" ][0]{ ...${lowerCamelName}}`,
-);
+const {data}: Data<{ ${lowerCamelName}: ${NAME}}>  = await getEntry("${NAME}", _id);
+
 const copy = getHtmlSimpleCopy(data.copy, headingLevel );
  ---
 <section class={`o-${className}`}>
