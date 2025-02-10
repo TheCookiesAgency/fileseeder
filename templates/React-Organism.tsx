@@ -6,6 +6,8 @@ import type {CollectionName} from "@/content/config";
 import type {Data} from "@/shared/utils/thecookies";
 import {getEntry} from "astro:content";
 import type {HomeEntry} from "@/content/sanity-home-collection";
+import {getOptimizedImage} from "@/shared/sanity/getOptimizedImage";
+
 
 interface Props {
     _id: string;
@@ -18,6 +20,11 @@ const entry = await getEntry(collection, _id) as Data<HomeEntry>;
 
 const data = entry.data.${lowerCamelName};
 const copy = getHtmlSimpleCopy(data?.copy, headingLevel );
+
+// let optimizedImage;
+// if (image) {
+//     optimizedImage = getOptimizedImage(image).url();
+// }
 
  ---
 
