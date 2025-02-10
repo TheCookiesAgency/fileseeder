@@ -2,7 +2,10 @@
 import {getHtmlSimpleCopy} from "@/shared/utils/get-html-render";
 
 import type {TagTitle} from "@/shared/utils/get-html-render";
-
+import type {CollectionName} from "@/content/config";
+import type {Data} from "@/shared/utils/thecookies";
+import {getEntry} from "astro:content";
+import type {HomeEntry} from "@/content/sanity-home-collection";
 
 interface Props {
     _id: string;
@@ -10,10 +13,11 @@ interface Props {
     headingLevel?: TagTitle
 }
 
-const {  _id, headingLevel, collection } = Astro.props;
-const entry: Data<{ ${lowerCamelName}: ${NAME}}>  = await getEntry(collection, _id);
-const data = entry.data.${lowerCamelName} as ${NAME}Entry;
-const copy = getHtmlSimpleCopy(data.copy, headingLevel );
+const {  _id, headingLevel, collection = "home"  } = Astro.props;
+const entry = await getEntry(collection, _id) as Data<HomeEntry>;
+
+const data = entry.data.${lowerCamelName};
+const copy = getHtmlSimpleCopy(data?.copy, headingLevel );
 
  ---
 
