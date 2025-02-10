@@ -11,7 +11,7 @@ import {getOptimizedImage} from "@/shared/sanity/getOptimizedImage";
 
 interface Props {
     _id: string;
-    collection: CollectionName;
+    collection?: CollectionName;
     headingLevel?: TagTitle
 }
 
