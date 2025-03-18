@@ -53,6 +53,13 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         file_extension = ".astro"  # Change file extension to .astro for Organism
     if tipo == "mol":
         scss_file = os.path.join(fs_path, 'templates/Class-Molecule.scss')
+        tsx_file = os.path.join(fs_path, 'templates/Astro-Molecule.tsx')
+        destination_path = mol_path
+        is_folder = True
+        new_folder = camelName
+        file_extension = ".astro"
+    if tipo == "react":
+        scss_file = os.path.join(fs_path, 'templates/Class-Molecule.scss')
         tsx_file = os.path.join(fs_path, 'templates/React-Molecule.tsx')
         destination_path = mol_path
         is_folder = True
