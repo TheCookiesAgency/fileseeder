@@ -17,6 +17,6 @@ const { data } = Astro.props;
 
 ---
 
-<${lowerCamelName} id={data._id} />
+<${lowerCamelName}Page id={data._id} />
 
     ${LAYOUT}
