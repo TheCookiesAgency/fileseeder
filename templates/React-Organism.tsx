@@ -16,8 +16,8 @@ interface Props {
 const {  _id, headingLevel, collection = "home"  } = Astro.props;
 const entry = await getEntry(collection, _id) as Data<HomeEntry>;
 
-const data = entry.data?.${lowerCamelName};
-const copy = getHtmlSimpleCopy(data?.copy, headingLevel );
+// const data = entry.data?.${lowerCamelName};
+// const copy = getHtmlSimpleCopy(data?.copy, headingLevel );
 
 // let optimizedImage;
 // if (image) {
@@ -29,7 +29,7 @@ const copy = getHtmlSimpleCopy(data?.copy, headingLevel );
 <section class={`o-${className}`}>
     <div class={`c-${className}`}>
         <h1>Hola! soy ${NAME},</h1>
-        <div class={`${className}__copy`} set:html={copy}/>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        {/*<div class={`${className}__copy`} set:html={copy}/>*/}
+        <pre>{JSON.stringify(entry, null, 2)}</pre>
     </div>
 </section>
