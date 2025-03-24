@@ -6,9 +6,9 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'name',
-      title: 'Nombre',
-      type: 'string'
+      name: 'copy',
+      title: 'Texto',
+      type: 'markdown'
     }),
   ],
   preview: {
