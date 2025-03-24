@@ -1,17 +1,15 @@
 ---
-import {getHtmlSimpleCopy} from "@/shared/utils/get-html-render";
+import {getHtmlSimpleCopy} from "@/common/utils/get-html-render";
 
-import type {TagTitle} from "@/shared/utils/get-html-render";
-import type {CollectionName} from "@/content/config";
-import type {Data} from "@/shared/utils/thecookies";
+import type {TagTitle} from "@/common/utils/get-html-render";
+import type { Data } from "@/common/astro";
 import {getEntry} from "astro:content";
-import type {HomeEntry} from "@/content/sanity-home-collection";
-import {getOptimizedImage} from "@/shared/sanity/getOptimizedImage";
+import {getOptimizedImage} from "@/common/sanity/getOptimizedImage";
 
 
 interface Props {
     _id: string;
-    collection?: CollectionName;
+    collection?: CollectionKey;
     headingLevel?: TagTitle
 }
 
