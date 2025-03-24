@@ -16,7 +16,7 @@ interface Props {
 const {  _id, headingLevel, collection = "home"  } = Astro.props;
 const entry = await getEntry(collection, _id) as Data<HomeEntry>;
 
-const data = entry.data.${lowerCamelName};
+const data = entry.data?.${lowerCamelName};
 const copy = getHtmlSimpleCopy(data?.copy, headingLevel );
 
 // let optimizedImage;
