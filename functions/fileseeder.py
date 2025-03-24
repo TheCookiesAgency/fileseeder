@@ -14,7 +14,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
 
     # Definir los directorios donde irá cada componente
     org_path = os.path.join(root_path, 'web/src/sections')
-    mol_path = os.path.join(root_path, 'web/src/modules')
+    mol_path = os.path.join(root_path, 'web/src/ui')
     atom_path = os.path.join(root_path, 'web/src/styles/components/atoms')
     sdoc_path = os.path.join(root_path, 'backoffice/schemas')
     sobj_path = os.path.join(root_path, 'backoffice/schemas/objects')

@@ -12,15 +12,17 @@ const { data } = Astro.props;
 
 ---
 
-// <div set:html={copy} />
+  <!--
+   <div set:html={copy} />
+  -->
 
 <div className={`m-${className}`}>
   <h2>Hola! soy ${NAME}, una molécula</h2>
   <p>
     Puedes encontrarme en <code>${DIR_PATH}</code> como {" "}
+  </p>
     <pre>${FILE_NAME}</pre>
     <pre>{JSON.stringify(data, null, 2)}</pre>
-  </p>
   <p>y mi flow parte de esta clase m-${className}, en el mismo dir :) </p>
 </div>
 
