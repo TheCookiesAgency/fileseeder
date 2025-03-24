@@ -3,7 +3,7 @@ import {getHtmlSimpleCopy} from "@/common/utils/get-html-render";
 
 import type {TagTitle} from "@/common/utils/get-html-render";
 import type { Data } from "@/common/astro";
-import {getEntry} from "astro:content";
+import { type CollectionKey, getEntry } from "astro:content";
 import {getOptimizedImage} from "@/common/sanity/getOptimizedImage";
 
 
