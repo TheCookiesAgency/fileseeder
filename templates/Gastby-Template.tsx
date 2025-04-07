@@ -6,7 +6,7 @@ export async function getStaticPaths() {
     const landingsList = await getCollection("${lowerCamelName}");
     return landingsList.map((landing) => ({
         params: {
-    ${lowerCamelName}: `${getSlugWithLang(landing.data.slug, landing.data.language)}`,
+    ${lowerCamelName}: landing.data.slug},
 },
     props: { data: landing.data },
 }));

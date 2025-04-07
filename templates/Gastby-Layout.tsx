@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import { getSlugWithLang } from "@global-shared/translations/utils/getSlugWithLang";
 
 
 export async function getStaticPaths() {

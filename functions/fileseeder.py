@@ -216,12 +216,11 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                 with open(ts_file, 'r') as reference_file:
                     code = reference_file.read().replace('${NAME}', camelName)
                     code = code.replace('${TITLE}', kebabTraduccion)
-                    if os.path.exists(layout_path) and os.path.exists(imports_path):
+                    if os.path.exists(layout_path):
                         with open(layout_path, 'r') as tempLayoutLine:
                             layoutTsx = tempLayoutLine.read().strip()
                         code = code.replace('${LAYOUT}', blocks_to_fields(layoutTsx))
                         os.remove(layout_path)
-                        os.remove(imports_path)
                     else:
                         code = code.replace('${LAYOUT}', "")
                 with open(file_path, 'w') as new_file:
