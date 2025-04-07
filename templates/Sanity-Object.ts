@@ -1,19 +1,16 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
+
+import { MEDIA_AND_COPY } from "../base/media";
+
 
 export default defineType({
   name: '${NAME}',
   title: '${TITLE}',
   type: 'object',
-  fields: [
-    defineField({
-      name: 'content',
-      title: 'Texto y fotos',
-      type: 'copyAndMedia'
-    }),
-  ],
+  fields: [ ...MEDIA_AND_COPY],
   preview: {
     select: {
-      title: 'name',
+      title: 'copy',
     }
   }
 })

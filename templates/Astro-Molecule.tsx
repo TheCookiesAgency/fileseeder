@@ -16,7 +16,7 @@ const { data } = Astro.props;
    <div set:html={copy} />
   -->
 
-<div className={`m-${className}`}>
+<div class={`m-${className}`}>
   <h2>Hola! soy ${NAME}, una molécula</h2>
   <p>
     Puedes encontrarme en <code>${DIR_PATH}</code> como {" "}
