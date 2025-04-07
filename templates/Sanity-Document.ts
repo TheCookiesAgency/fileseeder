@@ -12,7 +12,9 @@ export default defineType({
     { name: "content", title: "Contenido" },
     { name: "settings", title: "Configuración" },
   ],
-  fields: [...landing],
+  fields: [...landing,
+    ${LAYOUT}
+  ],
   preview: {
     select: {
       title: 'name',

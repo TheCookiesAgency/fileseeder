@@ -16,7 +16,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     org_path = os.path.join(root_path, 'web/src/sections')
     mol_path = os.path.join(root_path, 'web/src/ui')
     atom_path = os.path.join(root_path, 'web/src/styles/components/atoms')
-    sdoc_path = os.path.join(root_path, 'backoffice/schemas')
+    sdoc_path = os.path.join(root_path, 'backoffice/schemas/documents')
     sobj_path = os.path.join(root_path, 'backoffice/schemas/objects')
     gpag_path = os.path.join(root_path, 'web/src/pages')
     gtemp_path = os.path.join(root_path,  'web/src/pages')
