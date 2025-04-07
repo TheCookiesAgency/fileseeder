@@ -1,25 +1,18 @@
-import {defineField, defineType} from 'sanity'
+import {defineField, defineType} from 'sanity';
+
+import { landing } from "./base/landing";
+
 
 export default defineType({
   name: '${NAME}',
   title: '${TITLE}',
   type: 'document',
-  fields: [
-    defineField({
-      name: 'name',
-      title: 'Nombre',
-      type: 'string'
-    }),
-    defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: 'name',
-        maxLength: 96,
-        isUnique: (value, context) => context.defaultIsUnique(value, context)
-      }
-    }),
+  groups: [
+    { name: "seo", title: "Metas" },
+    { name: "content", title: "Contenido" },
+    { name: "settings", title: "Configuración" },
   ],
+  fields: [...landing],
   preview: {
     select: {
       title: 'name',

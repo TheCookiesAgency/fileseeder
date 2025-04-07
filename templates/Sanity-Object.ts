@@ -6,9 +6,9 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'copy',
-      title: 'Texto',
-      type: 'markdown'
+      name: 'content',
+      title: 'Texto y fotos',
+      type: 'copyAndMedia'
     }),
   ],
   preview: {
