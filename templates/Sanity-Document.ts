@@ -1,6 +1,6 @@
 import {defineField, defineType} from 'sanity';
 
-import { landing } from "./base/landing";
+import { landing } from "../base/landing";
 
 
 export default defineType({
