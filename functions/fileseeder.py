@@ -15,14 +15,14 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     fs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
     # Definir los directorios donde irá cada componente
-    org_path = os.path.join(root_path, 'web/src/sections')
-    mol_path = os.path.join(root_path, 'web/src/ui')
-    atom_path = os.path.join(root_path, 'web/src/styles/components/atoms')
-    sdoc_path = os.path.join(root_path, 'backoffice/schemas/documents')
-    sobj_path = os.path.join(root_path, 'backoffice/schemas/objects')
-    gpag_path = os.path.join(root_path, 'web/src/pages')
-    gtemp_path = os.path.join(root_path,  'web/src/pages')
-    land_path = os.path.join(root_path, 'web/src/styles/layouts')
+    org_path = os.path.join(root_path, 'apps/web/src/sections')
+    mol_path = os.path.join(root_path, 'apps/web/src/ui')
+    atom_path = os.path.join(root_path, 'apps/web/src/styles/components/atoms')
+    sdoc_path = os.path.join(root_path, 'packages/sanity-schemas/src/documents')
+    sobj_path = os.path.join(root_path, 'packages/sanity-schemas/src/objects')
+    gpag_path = os.path.join(root_path, 'apps/web/src/pages')
+    gtemp_path = os.path.join(root_path,  'apps/web/src/pages')
+    land_path = os.path.join(root_path, 'apps/web/src/styles/layouts')
 
     # Definir la ruta donde se encontrará el layout y los imports temporales en caso de gastby
     layout_path = os.path.join(root_path, 'temp_layout_fs.tsx')
@@ -47,21 +47,21 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
 
     # Restricción de la variable type y definir archivos y directorio
     if tipo == "org":
-        scss_file = os.path.join(fs_path, 'templates/Class-Organism.scss')
+        scss_file = os.path.join(fs_path, 'templates/Class-Organism.css')
         tsx_file = os.path.join(fs_path, 'templates/React-Organism.tsx')
         destination_path = org_path
         is_folder = True
         new_folder = camelName
         file_extension = ".astro"  # Change file extension to .astro for Organism
     if tipo == "mol":
-        scss_file = os.path.join(fs_path, 'templates/Class-Molecule.scss')
+        scss_file = os.path.join(fs_path, 'templates/Class-Molecule.css')
         tsx_file = os.path.join(fs_path, 'templates/Astro-Molecule.tsx')
         destination_path = mol_path
         is_folder = True
         new_folder = camelName
         file_extension = ".astro"
     if tipo == "react":
-        scss_file = os.path.join(fs_path, 'templates/Class-Molecule.scss')
+        scss_file = os.path.join(fs_path, 'templates/Class-Molecule.css')
         tsx_file = os.path.join(fs_path, 'templates/React-Molecule.tsx')
         destination_path = mol_path
         is_folder = True
@@ -69,7 +69,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         file_extension = ".tsx"
 
     if tipo == "atom":
-        scss_file = os.path.join(fs_path, 'templates/Class-Atom.scss')
+        scss_file = os.path.join(fs_path, 'templates/Class-Atom.css')
         destination_path = atom_path
         file_extension = ".scss"
 
@@ -97,9 +97,9 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         file_extension = ".astro"
 
     if tipo == "land":
-        scss_file = os.path.join(fs_path, 'templates/Class-Landing.scss')
+        scss_file = os.path.join(fs_path, 'templates/Class-Landing.css')
         destination_path = land_path
-        file_extension = ".scss"
+        file_extension = ".css"
 
     if tipo not in ["org", "mol", "atom", "sdoc", "sobj", "gpag", "gtemp", "land"]:
         print(f'Debes especificar que quieres crear')
@@ -134,7 +134,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
 
     # Definir la ruta completa del archivo por crear
     if scss_file is not None:
-        if "web/src/styles" in destination_path:
+        if "apps/web/src/styles" in destination_path:
             file_path = os.path.join(destination_path, "_" + kebabName + ".scss")
         else:
             file_path = os.path.join(destination_path, kebabName + ".scss")

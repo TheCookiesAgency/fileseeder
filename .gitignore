@@ -162,3 +162,5 @@ node_modules/
 components/
 web/
 backoffice/
+apps/
+packages/

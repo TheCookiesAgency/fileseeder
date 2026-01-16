@@ -1,5 +1,3 @@
-@use "../../settings/variables";
-
 .a-${NAME}{
   border: 1px dotted green ;
   color: green;
