@@ -7,7 +7,7 @@ import type { LandingPage } from "@/common/types";
 import type { ${NAME} }  from "@repo/types/sanity";
 
 import { type CollectionKey, getEntry } from "astro:content";
-import {getOptimizedImage} from "@/common/sanity/getOptimizedImage";
+import {getOptimizedImage} from "@/common/utils/getOptimizedImage";
 
 
 interface Props {
