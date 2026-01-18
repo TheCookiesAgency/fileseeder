@@ -15,10 +15,10 @@ interface Props {
     collection?: CollectionKey;
     headingLevel?: TagTitle
 
-    data: unknown;
+    data?: unknown;
 }
 
-const {  _id, headingLevel, collection = "home"  } = Astro.props;
+const {  _id, headingLevel, collection = "home", data  } = Astro.props;
 // const entry = await getEntry(collection, _id) as Data<LandingPage & { ${lowerCamelName} : ${NAME} } >;
 
 // const data = entry.data?.${lowerCamelName};
