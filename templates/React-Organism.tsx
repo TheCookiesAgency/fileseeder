@@ -1,10 +1,11 @@
 ---
 import {getHtmlSimpleCopy} from "@/common/utils/get-html-render";
-
 import type {TagTitle} from "@/common/utils/get-html-render";
 import type { Data } from "@/common/astro";
 import type { LandingPage } from "@/common/types";
 import type { ${NAME} }  from "@repo/types/sanity";
+import { t } from "@repo/i18n";
+
 
 import { type CollectionKey, getEntry } from "astro:content";
 import {getOptimizedImage} from "@/common/utils/getOptimizedImage";

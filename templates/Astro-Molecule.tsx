@@ -1,12 +1,14 @@
 ---
 
 import { getHtmlSimpleCopy } from "@/common/utils/get-html-render";
+import { t,  DEFAULT_LANGUAGE, type LANGUAGE } from "@repo/i18n";
 
 type Props = {
     data: unknown;
+    language: LANGUAGE
 }
 
-const { data } = Astro.props;
+const { data, language = DEFAULT_LANGUAGE } = Astro.props;
 
 // const copy = getHtmlSimpleCopy(data.copy);
 
