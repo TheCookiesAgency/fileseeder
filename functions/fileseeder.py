@@ -71,7 +71,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     if tipo == "atom":
         scss_file = os.path.join(fs_path, 'templates/Class-Atom.css')
         destination_path = atom_path
-        file_extension = ".scss"
+        file_extension = ".css"
 
     if tipo == "sdoc":
         ts_file = os.path.join(fs_path, 'templates/Sanity-Document.ts')
@@ -135,9 +135,9 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     # Definir la ruta completa del archivo por crear
     if scss_file is not None:
         if "apps/web/src/styles" in destination_path:
-            file_path = os.path.join(destination_path, "_" + kebabName + ".scss")
+            file_path = os.path.join(destination_path, "_" + kebabName + ".css")
         else:
-            file_path = os.path.join(destination_path, kebabName + ".scss")
+            file_path = os.path.join(destination_path, kebabName + ".css")
     if tsx_file is not None:
         if tipo == "gpag" or tipo == "gtemp":
             spreadFile = "[..." + lowerCamelName + "]"
@@ -176,9 +176,9 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
                     code = reference_file.read().replace('${NAME}', kebabName)
                 if is_folder:
                     if renameFile:
-                        file_path = os.path.join(destination_path, kebabTraduccion + ".scss")
+                        file_path = os.path.join(destination_path, kebabTraduccion + ".css")
                     else:
-                        file_path = os.path.join(destination_path, kebabName + ".scss")
+                        file_path = os.path.join(destination_path, kebabName + ".css")
                 with open(file_path, 'w') as new_file:
                     new_file.write(code)
                 print(f'{file_path} creado')
