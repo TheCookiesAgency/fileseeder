@@ -15,8 +15,8 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     fs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
     # Definir los directorios donde irá cada componente
-    org_path = os.path.join(root_path, 'apps/web/src/sections')
-    mol_path = os.path.join(root_path, 'apps/web/src/ui')
+    org_path = os.path.join(root_path, 'apps/web/src/organisms')
+    mol_path = os.path.join(root_path, 'apps/web/src/molecules')
     atom_path = os.path.join(root_path, 'apps/web/src/styles/components/atoms')
     sdoc_path = os.path.join(root_path, 'packages/sanity-schemas/src/documents')
     sobj_path = os.path.join(root_path, 'packages/sanity-schemas/src/objects')

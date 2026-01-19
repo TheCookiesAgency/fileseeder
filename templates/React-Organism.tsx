@@ -12,13 +12,11 @@ import {getOptimizedImage} from "@/common/utils/getOptimizedImage";
 
 interface Props {
     _id: string;
-    collection?: CollectionKey;
+    collection: CollectionKey;
     headingLevel?: TagTitle
-
-    data?: unknown;
 }
 
-const {  _id, headingLevel, collection = "home", data  } = Astro.props;
+const {  _id, headingLevel, collection  } = Astro.props;
 // const entry = await getEntry(collection, _id) as Data<LandingPage & { ${lowerCamelName} : ${NAME} } >;
 
 // const data = entry.data?.${lowerCamelName};
@@ -35,6 +33,6 @@ const {  _id, headingLevel, collection = "home", data  } = Astro.props;
     <div class={`c-${className}`}>
         <h1>Hola! soy ${NAME},</h1>
         {/*<div class={`${className}__copy`} set:html={copy}/>*/}
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        {/*<pre>{JSON.stringify(entry, null, 2)}</pre>*/}
     </div>
 </section>
