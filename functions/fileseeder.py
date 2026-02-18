@@ -17,7 +17,7 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
     # Definir los directorios donde irá cada componente
     org_path = os.path.join(root_path, 'apps/web/src/organisms')
     mol_path = os.path.join(root_path, 'apps/web/src/molecules')
-    atom_path = os.path.join(root_path, 'apps/web/src/styles/components/atoms')
+    atom_path = os.path.join(root_path, 'tmp/atoms')
     sdoc_path = os.path.join(root_path, 'packages/sanity-schemas/src/documents')
     sobj_path = os.path.join(root_path, 'packages/sanity-schemas/src/objects')
     gpag_path = os.path.join(root_path, 'apps/web/src/pages')
@@ -70,8 +70,11 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
 
     if tipo == "atom":
         scss_file = os.path.join(fs_path, 'templates/Class-Atom.css')
+        tsx_file = os.path.join(fs_path, 'templates/atom.astro')
         destination_path = atom_path
-        file_extension = ".css"
+        is_folder = True
+        new_folder = camelName
+        file_extension = ".astro"
 
     if tipo == "sdoc":
         ts_file = os.path.join(fs_path, 'templates/Sanity-Document.ts')
