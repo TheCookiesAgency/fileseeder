@@ -1,3 +1,7 @@
+.c-${NAME}{
+  container: ${NAME} / inline-size;
+}
+
 .m-${NAME}{
   border: 1px dotted orange ;
   color: orange;

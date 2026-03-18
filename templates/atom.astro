@@ -1,18 +1,19 @@
 ---
 
 import { getHtmlSimpleCopy } from "@/common/utils/get-html-render";
-import { t,  DEFAULT_LANGUAGE, type LANGUAGE } from "@repo/i18n";
+import { t,  getCurrentLanguage } from "@repo/i18n";
 import { type CollectionKey, getEntry } from "astro:content";
 
 type Props = {
     data: unknown;
-    language: LANGUAGE
     // _id: string;
     // collection: CollectionKey;
     // headingLevel?: TagTitle
 }
 
-const { data, language = DEFAULT_LANGUAGE } = Astro.props;
+const { data } = Astro.props;
+
+const language = getCurrentLanguage(Astro.currentLocale);
 
 // const copy = getHtmlSimpleCopy(data.copy);
 // const entry = await getEntry(collection, _id) as Data<LandingPage & { ${lowerCamelName} : ${NAME} } >;
