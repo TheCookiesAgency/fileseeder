@@ -2,13 +2,12 @@
 import {getHtmlSimpleCopy} from "@/common/utils/get-html-render";
 import { HeadingLevel } from "@repo/constants";
 import type { Media, PropsComponentSection } from "@/common/types";
-import type { ${NAME} }  from "@repo/types/sanity";
 import { t, getCurrentLanguage } from "@repo/i18n";
 
 import {getOptimizedImage} from "@/common/utils/getOptimizedImage";
 
 
-type Props = PropComponentSection;
+type Props = PropsComponentSection;
 
 const {  copy, mediaList, headingLevel  = HeadingLevel.P } = Astro.props;
 

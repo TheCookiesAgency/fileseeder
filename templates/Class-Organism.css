@@ -4,6 +4,7 @@
   color: blue;
   border: 1px dotted blue ;
 }
+
 .c-${NAME}{
   width: var(--size-boxed-width);
   max-width: var(--size-max-boxed);
