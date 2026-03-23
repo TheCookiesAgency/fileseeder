@@ -19,8 +19,8 @@ const language = getCurrentLanguage(Astro.currentLocale);
     <!--
      <div set:html={copy} />
     -->
-<div className={`c-${className}`}>
-  <div className={`m-${className}`}>
+<div class={`c-${className}`}>
+  <div class={`m-${className}`}>
     <h2>Hola! soy ${NAME}, una molécula</h2>
     <p>
       Puedes encontrarme en <code>${DIR_PATH}</code> como {" "}
