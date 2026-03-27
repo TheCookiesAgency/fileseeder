@@ -9,11 +9,11 @@ import {getOptimizedImage} from "@/common/utils/getOptimizedImage";
 
 type Props = PropsComponentSection;
 
-const {  copy, mediaList, headingLevel  = HeadingLevel.P } = Astro.props;
+const {  copy: _copy, mediaList, headingLevel  = HeadingLevel.P } = Astro.props;
 
 const language = getCurrentLanguage(Astro.currentLocale);
 
-const copy = getHtmlSimpleCopy(data?.copy, headingLevel );
+const copy = getHtmlSimpleCopy(_copy, headingLevel );
 
 // let optimizedImage;
 // if (image) {
