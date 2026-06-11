@@ -1,6 +1,6 @@
 .o-${NAME}{
-  margin-top: var(--size-gap-section);
-  margin-bottom: var(--size-gap-section);
+  margin-top: var(--size-spacing-section);
+  margin-bottom: var(--size-spacing-section);
   color: blue;
   border: 1px dotted blue ;
 }
