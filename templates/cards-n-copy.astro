@@ -1,0 +1,52 @@
+---
+import type { SectionCardsNCopy } from "@repo/types";
+import { getTitle, getParagraphs, getHtmlSimpleCopy } from "@/common/utils/get-html-render.ts";
+import type { ItemSectionCardsLayout, PhotoReference } from "@/common/types";
+
+
+import { t,  getCurrentLanguage } from "@repo/i18n";
+
+type Props = SectionCardsNCopy;
+
+const { data } = Astro.props;
+
+const language = getCurrentLanguage(Astro.currentLocale);
+
+const title = getTitle(data.copy);
+const paragraphs = getParagraphs(data.copy);
+
+
+type Card = {
+  name: string;
+  copy: string;
+  icon?: PhotoReference,
+  mediaList: Array<PhotoReference>
+};
+
+const cards: Card[] = (data.list ?? []).map((item: ItemSectionCardsLayout) => ({
+  ...item,
+  name: item.namm ?? "",
+  copy: String(getHtmlSimpleCopy(item.copy ?? '', 'original')),
+}));
+
+
+---
+
+  <!--
+   <div set:html={copy} />
+  -->
+
+<div class={`m-${className}`}>
+  <h2>Hola! soy ${NAME}, una molécula</h2>
+  <p>
+    Puedes encontrarme en <code>${DIR_PATH}</code> como {" "}
+  </p>
+  <ul>
+    {data?.list.map((item) =>  <li>{item.name ?? "No name" }</li> ) }
+
+  </ul>
+    <pre>${FILE_NAME}</pre>
+    <pre>{JSON.stringify(data, null, 2)}</pre>
+  <p>y mi flow parte de esta clase m-${className}, en el mismo dir :) </p>
+</div>
+
