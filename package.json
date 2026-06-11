@@ -14,6 +14,8 @@
     "create:sanity-object": "python3 comand_fs.py sobj",
     "create:page": "python3 comand_fs.py gpag",
     "create:landing": "python3 comand_fs.py land",
+    "create:component:section-list": "python3 comand_fs.py cards",
+    "create:component:section-copy-n-media": "python3 comand_fs.py copy-n-media",
     "open:fileseeder": "python3 interface_fs.py",
     "create:structure": "python3 bystructure_fs.py",
     "clean:all": "python3 functions/cleaner.py",

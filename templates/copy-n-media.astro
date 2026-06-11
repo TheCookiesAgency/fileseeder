@@ -1,0 +1,57 @@
+---
+import type { SectionCopyAndMedia } from "@repo/types";
+import { getTitle, getParagraphs, getHtmlSimpleCopy } from "@/common/utils/get-html-render.ts";
+import type { ItemSectionCardsLayout, PhotoReference } from "@/common/types";
+import HlsVideoPlayer from "@/common/utils/HlsVideoPlayer.astro";
+
+
+import { t,  getCurrentLanguage } from "@repo/i18n";
+
+type Props = SectionCopyAndMedia;
+
+const { data } = Astro.props;
+
+const backgroundVideo = data.mediaList?.find((item: { _type?: string }) => item._type === "video");
+const videoSrc = backgroundVideo?._type === "video" ? backgroundVideo.urlHorizontal : undefined;
+const videoPoster = backgroundVideo?._type === "video" ? backgroundVideo.imgHorizontal : undefined;
+
+const language = getCurrentLanguage(Astro.currentLocale);
+
+const title = getTitle(data.copy);
+const paragraphs = getParagraphs(data.copy);
+
+const copy = getHtmlSimpleCopy(data.copy);
+
+
+---
+
+  <!--
+   <div set:html={copy} />
+  -->
+
+<div class={`m-${className}`}>
+  <h2>Hola! soy ${NAME}, una molécula</h2>
+  {videoSrc && (
+      <HlsVideoPlayer
+          src={videoSrc}
+          poster={videoPoster}
+          autoplay
+          muted
+          loop
+          controls={false}
+          playsinline
+          class={`${className}__video`}
+      />
+  )}
+  <p>
+    Puedes encontrarme en <code>${DIR_PATH}</code> como {" "}
+  </p>
+  <ul>
+    {data?.list.map((item) =>  <li>{item.name ?? "No name" }</li> ) }
+
+  </ul>
+    <pre>${FILE_NAME}</pre>
+    <pre>{JSON.stringify(data, null, 2)}</pre>
+  <p>y mi flow parte de esta clase m-${className}, en el mismo dir :) </p>
+</div>
+

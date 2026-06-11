@@ -104,7 +104,23 @@ def fileseeder( tipo = None, camelName = None, camelTraduccion = None, delete = 
         destination_path = land_path
         file_extension = ".css"
 
-    if tipo not in ["org", "mol", "atom", "sdoc", "sobj", "gpag", "gtemp", "land"]:
+    if tipo == "cards":
+        scss_file = os.path.join(fs_path, 'templates/Class-Organism.css')
+        tsx_file = os.path.join(fs_path, 'templates/cards-n-copy.astro')
+        destination_path = org_path
+        is_folder = True
+        new_folder = camelName
+        file_extension = ".astro"
+
+    if tipo == "copy-n-media":
+        scss_file = os.path.join(fs_path, 'templates/Class-Organism.css')
+        tsx_file = os.path.join(fs_path, 'templates/copy-n-media.astro')
+        destination_path = org_path
+        is_folder = True
+        new_folder = camelName
+        file_extension = ".astro"
+
+    if tipo not in ["org", "mol", "atom", "sdoc", "sobj", "gpag", "gtemp", "land", "cards", "copy-n-media"]:
         print(f'Debes especificar que quieres crear')
         return
 
