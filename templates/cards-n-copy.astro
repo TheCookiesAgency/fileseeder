@@ -2,19 +2,38 @@
 import type { SectionCardsNCopy } from "@repo/types";
 import { getHtmlSimpleCopy } from "@/common/utils/get-html-render.ts";
 import { HeadingLevel } from "@repo/constants";
+import { getCurrentLanguage } from "@repo/i18n";
+import { getCollection } from "astro:content";
 
 type Props = SectionCardsNCopy;
+type ${NAME}Item = {
+  name?: string;
+  title?: string;
+  pathname?: string;
+};
 
-const { copy: _copy, headingLevel = HeadingLevel.P, list = [] } = Astro.props;
+const { copy: _copy, headingLevel = HeadingLevel.P, list = [], listByReference } = Astro.props;
 const copy = getHtmlSimpleCopy(_copy, headingLevel);
+const language = getCurrentLanguage(Astro.currentLocale);
+
+const referencedItems = listByReference
+  ? await getCollection(listByReference, ({ data }) => !("language" in data) || data.language === language)
+  : [];
+
+const ${lowerCamelName}Items: ${NAME}Item[] = listByReference ? referencedItems.map(({ data }) => data) : list;
+const getItemTitle = (item: ${NAME}Item) => item.name ?? item.title;
 ---
 
 <section class={`o-${className}`}>
   <div class={`c-${className}`}>
     {_copy && <div class={`${className}__copy`} set:html={copy} />}
-    {list.length > 0 && (
+    {${lowerCamelName}Items.length > 0 && (
       <div class={`${className}__list`}>
-        {list.map((item) => <article class={`${className}__item`}>{item.name}</article>)}
+        {${lowerCamelName}Items.map((item) => (
+          <article class={`${className}__item`}>
+            {item.pathname ? <a href={item.pathname}>{getItemTitle(item)}</a> : getItemTitle(item)}
+          </article>
+        ))}
       </div>
     )}
   </div>
